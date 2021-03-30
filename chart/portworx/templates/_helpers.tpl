@@ -143,7 +143,7 @@ Populate the ports based on deployemnt environment
 
 {{- define "px.pxSDKPort" -}}
 {{- if ( eq true .Values.changePortRange) -}}
-    {{- printf "17020" -}}
+    {{- printf "17017" -}}
 {{- else -}}
     {{- printf "9020" -}}
 {{- end -}}
