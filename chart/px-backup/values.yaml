@@ -64,13 +64,13 @@ images:
   pxcentralMiddlewareImage:
     registry: docker.io
     repo: portworx
-    imageName: pxcentral-onprem-ui-lhbackend
-    tag: 1.2.3-rc1
+    imageName: pxcentral-onprem-ui-lhbackend-private
+    tag: 1.2.3-rc2
   pxBackupImage:
     registry: docker.io
     repo: portworx
     imageName: px-backup
-    tag: 1.2.3-rc1
+    tag: 1.2.3-rc2
   postInstallSetupImage:
     registry: docker.io
     repo: portworx
