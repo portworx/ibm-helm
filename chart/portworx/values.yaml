@@ -22,9 +22,11 @@ advOpts: none
 
 storkVersion: 2.6.2
 
-customRegistryURL:
+customRegistryURL: 
 registrySecret:
 imagePullSecrets:
+icrRegistry: 
+icrSecret: 
 
 lighthouse: false
 lighthouseVersion: 2.0.5
