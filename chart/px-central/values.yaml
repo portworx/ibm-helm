@@ -41,6 +41,9 @@ oidc:
     clientSecret:
     endpoint:
 
+postInstallJob:
+  sslEnabled: true
+
 pxbackup:
   enabled: false
   orgName: default
@@ -118,27 +121,27 @@ images:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-api
-    tag: 2.0.0
+    tag: 2.0.1
   pxcentralFrontendImage:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-ui-frontend
-    tag: 2.0.0
+    tag: 2.0.1
   pxcentralBackendImage:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-ui-backend
-    tag: 2.0.0
+    tag: 2.0.1
   pxcentralMiddlewareImage:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-ui-lhbackend
-    tag: 2.0.0
+    tag: 2.0.1
   postInstallSetupImage:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-post-setup
-    tag: 2.0.0
+    tag: 2.0.1
   keycloakBackendImage:
     registry: docker.io
     repo: portworx
@@ -148,12 +151,12 @@ images:
     registry: docker.io
     repo: portworx
     imageName: keycloak
-    tag: 9.0.2
+    tag: 14.0.0
   keycloakLoginThemeImage:
     registry: docker.io
     repo: portworx
     imageName: keycloak-login-theme
-    tag: 1.0.4
+    tag: 2.0.1
   keycloakInitContainerImage:
     registry: docker.io
     repo: portworx
@@ -170,7 +173,7 @@ images:
     registry: docker.io
     repo: portworx
     imageName: px-backup
-    tag: 2.0.0
+    tag: 2.0.1
   etcdImage:
     registry: docker.io
     repo: portworx
@@ -187,7 +190,7 @@ images:
     registry: docker.io
     repo: portworx
     imageName: px-els
-    tag: 1.1.0
+    tag: 2.0.1
 
   ## Images required for enabling px-monitor
   cortexImage:
