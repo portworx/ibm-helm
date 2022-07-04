@@ -187,96 +187,96 @@ spec:
     rules:
     - alert: PortworxVolumeUsageCritical
       annotations:
-        description: Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is over 80% used for
-          more than 10 minutes.
-        summary: Portworx volume capacity is at {{$value}}% used.
+        description: {{`Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is over 80% used for
+          more than 10 minutes.`}}
+        summary: {{`Portworx volume capacity is at {{$value}}% used.`}}
       expr: 100 * (px_volume_usage_bytes / px_volume_capacity_bytes) > 80
       for: 5m
       labels:
-        issue: Portworx volume {{$labels.volumeid}} usage on {{$labels.instance}} is high.
+        issue: {{`Portworx volume {{$labels.volumeid}} usage on {{$labels.instance}} is high.`}}
         severity: critical
     - alert: PortworxVolumeUsage
       annotations:
-        description: Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is over 70% used for
-          more than 10 minutes.
-        summary: Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is at {{$value}}% used.
+        description: {{`Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is over 70% used for
+          more than 10 minutes.`}}
+        summary: {{`Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is at {{$value}}% used.`}}
       expr: 100 * (px_volume_usage_bytes / px_volume_capacity_bytes) > 70
       for: 5m
       labels:
-        issue: Portworx volume {{$labels.volumeid}} usage on {{$labels.instance}} is critical.
+        issue: {{`Portworx volume {{$labels.volumeid}} usage on {{$labels.instance}} is critical.`}}
         severity: warning
     - alert: PortworxVolumeWillFill
       annotations:
-        description: Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is over 70% full and has
-          been predicted to fill within 2 weeks.
-        summary: Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is over 70% full and is
-          predicted to fill within 2 weeks.
+        description: {{`Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is over 70% full and has
+          been predicted to fill within 2 weeks.`}}
+        summary: {{`Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is over 70% full and is
+          predicted to fill within 2 weeks.`}}
       expr: (px_volume_usage_bytes / px_volume_capacity_bytes) > 0.7 and predict_linear(px_cluster_disk_available_bytes[1h],
         14 * 86400) < 0
       for: 10m
       labels:
-        issue: Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is predicted to fill within
-          2 weeks.
+        issue: {{`Portworx volume {{$labels.volumeid}} on {{$labels.instance}} is predicted to fill within
+          2 weeks.`}}
         severity: warning
     - alert: PortworxVolumeNotInQuorum
       annotations:
-        description: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is out of quorum. Please check all nodes with that volume replicas are online.
-        summary: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is out of quorum.
+        description:{{` Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is out of quorum. Please check all nodes with that volume replicas are online.`}}
+        summary: {{`Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is out of quorum.`}}
       expr: px_volume_replication_status == 1
       labels:
         issue: Portworx volume out of quorum.
         severity: warning
     - alert: PortworxVolumeInResync
       annotations:
-        description: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in resync state.
-        summary: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in resync state.
+        description: {{`Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in resync state.`}}
+        summary: {{`Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in resync state.`}}
       expr: px_volume_replication_status == 2
       labels:
         issue: Portworx volume in resync state.
         severity: warning
     - alert: PortworxVolumeDegraded
       annotations:
-        description: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in degraded state. Please check all nodes with that volume replicas are online.
-        summary: Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in degraded state.
+        description: {{`Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in degraded state. Please check all nodes with that volume replicas are online.`}}
+        summary: {{`Portworx volume {{$labels.volumeid}} from cluster {{$labels.cluster}} is in degraded state.`}}
       expr: px_volume_replication_status == 3
       labels:
         issue: Portworx volume in degraded state.
         severity: warning
     - alert: PortworxStorageUsageCritical
       annotations:
-        description: Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is over 80% used
-          for more than 10 minutes.
-        summary: Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is at {{$value}}% used.
+        description: {{`Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is over 80% used
+          for more than 10 minutes.`}}
+        summary: {{`Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is at {{$value}}% used.`}}
       expr: 100 * (1 - px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes)
         < 20
       for: 5m
       labels:
-        issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.instance}} is critical.
+        issue: {{`Portworx storage {{$labels.volumeid}} usage on {{$labels.instance}} is critical.`}}
         severity: critical
     - alert: PortworxStorageUsage
       annotations:
-        description: Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is over 70% used
-          for more than 10 minutes.
-        summary: Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is at {{$value}}% used.
+        description: {{`Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is over 70% used
+          for more than 10 minutes.`}}
+        summary: {{`Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is at {{$value}}% used.`}}
       expr: 100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes))
         < 30
       for: 5m
       labels:
-        issue: Portworx storage {{$labels.volumeid}} usage on {{$labels.instance}} is critical.
+        issue: {{`Portworx storage {{$labels.volumeid}} usage on {{$labels.instance}} is critical.`}}
         severity: warning
     - alert: PortworxStorageWillFill
       annotations:
-        description: Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is over 70% full
-          and has been predicted to fill within 2 weeks for more than 10 minutes.
-        summary: Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is over 70% full and
-          is predicted to fill within 2 weeks.
+        description: {{`Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is over 70% full
+          and has been predicted to fill within 2 weeks for more than 10 minutes.`}}
+        summary: {{`Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is over 70% full and
+          is predicted to fill within 2 weeks.`}}
       expr: (100 * (1 - (px_cluster_disk_utilized_bytes / px_cluster_disk_total_bytes)))
         < 30 and predict_linear(px_cluster_disk_available_bytes[1h], 14 * 86400) <
         0
       for: 10m
       labels:
-        issue: Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is predicted to fill within
-          2 weeks.
+        issue: {{`Portworx storage {{$labels.volumeid}} on {{$labels.instance}} is predicted to fill within
+          2 weeks.`}}
         severity: warning
     - alert: PortworxStorageNodeDown
       annotations:
@@ -309,8 +309,8 @@ spec:
         severity: critical
     - alert: PXBackupError
       annotations:
-        description: Failed to take backup for volume {{$labels.volumename}} with error {{$labels.error_string}}.
-        summary: Failed to take backup for volume {{$labels.volumename}}.
+        description: {{`Failed to take backup for volume {{$labels.volumename}} with error {{$labels.error_string}}.`}}
+        summary: {{`Failed to take backup for volume {{$labels.volumename}}.`}}
       expr: px_backup_stats_status == 2
       labels:
         issue: Cloudsnap backup error.
