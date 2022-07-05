@@ -111,8 +111,8 @@ spec:
         - args:
             - -namespaces=kube-system
             - --kubelet-service=kube-system/kubelet
-            - --prometheus-config-reloader=quay.io/prometheus-operator/prometheus-config-reloader:v0.50.0
-          image: quay.io/prometheus-operator/prometheus-operator:v0.50.0
+            - --prometheus-config-reloader={{ template "px.getPrometheusConfigReloaderImage" . }}:{{ required "A valid Image tag is required in the SemVer format" .Values.prometheusConfigReloaderVersion }}
+          image: {{ template "px.getPrometheusOperatorImage" . }}:{{ required "A valid Image tag is required in the SemVer format" .Values.prometheusOperatorVersion }}
           imagePullPolicy: Always
           name: prometheus-operator
           ports:
