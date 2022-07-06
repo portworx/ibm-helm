@@ -25,6 +25,8 @@ grafanaVersion: 5.3.3
 prometheusOperatorVersion: v0.50.0
 prometheusConfigReloaderVersion: v0.50.0
 autopilotVersion: 1.3.2
+prometheusVersion: latest
+alertmanagerVersion: v0.22.2
 
 customRegistryURL: 
 registrySecret:

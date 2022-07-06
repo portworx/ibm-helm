@@ -104,6 +104,18 @@ productVersion: {{ quote .Values.imageVersion }}
 {{- end -}}
 {{- end -}}
 
+{{- define "px.getPrometheusImage" -}}
+{{- if (.Values.customRegistryURL) -}}
+    {{- if (eq "/" (.Values.customRegistryURL | regexFind "/")) -}}
+        {{ cat (trim .Values.customRegistryURL) "/prometheus" | replace " " ""}}
+    {{- else -}}
+        {{cat (trim .Values.customRegistryURL) "/prometheus/prometheus" | replace " " ""}}
+    {{- end -}}
+{{- else -}}
+    {{ "quay.io/prometheus/prometheus" }}
+{{- end -}}
+{{- end -}}
+
 {{- define "px.getPrometheusConfigReloaderImage" -}}
 {{- if (.Values.customRegistryURL) -}}
     {{- if (eq "/" (.Values.customRegistryURL | regexFind "/")) -}}
@@ -113,6 +125,18 @@ productVersion: {{ quote .Values.imageVersion }}
     {{- end -}}
 {{- else -}}
     {{ "quay.io/prometheus-operator/prometheus-config-reloader" }}
+{{- end -}}
+{{- end -}}
+
+{{- define "px.getAlertmanagerImage" -}}
+{{- if (.Values.customRegistryURL) -}}
+    {{- if (eq "/" (.Values.customRegistryURL | regexFind "/")) -}}
+        {{ cat (trim .Values.customRegistryURL) "/alertmanager" | replace " " ""}}
+    {{- else -}}
+        {{cat (trim .Values.customRegistryURL) "/prometheus/alertmanager" | replace " " ""}}
+    {{- end -}}
+{{- else -}}
+    {{ "quay.io/prometheus/alertmanager" }}
 {{- end -}}
 {{- end -}}
 
