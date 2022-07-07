@@ -111,7 +111,7 @@ spec:
         app: grafana
     spec:
       containers:
-        - image: grafana/grafana:5.3.3
+        - image: {{ template "px.getGrafanaImage" . }}:{{ required "A valid Image tag is required in the SemVer format" .Values.grafanaVersion }}
           name: grafana
           imagePullPolicy: IfNotPresent
           resources:
