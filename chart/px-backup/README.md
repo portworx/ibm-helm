@@ -48,7 +48,7 @@ To enable px-backup after installing px-central, Follow the upgrade steps mentio
 
 2. helm get values --namespace px-backup px-backup -o yaml > values.yaml
 
-3. Delete post install job: `kubectl delete job -npx-backup px-central-post-install-hook`
+3. Delete post install job: `kubectl delete job -npx-backup pxcentral-post-install-hook`
 
 4. Run helm upgrade command:
 ```console
@@ -103,6 +103,7 @@ Parameter | Description | Default
 `images` | PX-Backup deployment images | `""`
 `pxbackup.enabled` | Enabled PX-Backup | `true`
 `pxbackup.orgName` | PX-Backup organization name | `default`
+`pxbackup.nodeAffinityLabel` | Label for node affinity for px-central components| `""`
 `securityContext` | Security context for the pod | `{runAsUser: 1000, fsGroup: 1000, runAsNonRoot: true}`
 `images.pullSecrets` | Image pull secrets | `docregistry-secret`
 `images.pullPolicy` | Image pull policy | `Always`
@@ -181,7 +182,7 @@ spec:
           servicePort: 80
         path: /
       - backend:
-          serviceName: px-central-keycloak-http
+          serviceName: pxcentral-keycloak-http
           servicePort: 80
         path: /auth
   tls:
@@ -287,12 +288,12 @@ Note: Keycloak auth and Grafana UI will be accessible on same endpoint on differ
 1. How to check install logs:
    To get the logs of post install hook:
    ```console
-   $ kubectl logs -f --namespace {{ .Release.Namespace }} -ljob-name=px-central-post-install-hook
+   $ kubectl logs -f --namespace {{ .Release.Namespace }} -ljob-name=pxcentral-post-install-hook
    ```
 
 2. If one or many pods of the etcd replica goes into `CrashLoopBackOff` state during install or upgrade and error looks like following:
 ```
-px-central-backup-etcd-1                          0/1     CrashLoopBackOff   6          10m
+pxc-backup-etcd-1                          0/1     CrashLoopBackOff   6          10m
 [root@ip-node1 helm]# kubectl logs pxc-backup-etcd-1 -n px-backup
 ==> Bash debug is off
 ==> Detected data from previous deployments...
@@ -302,10 +303,10 @@ px-central-backup-etcd-1                          0/1     CrashLoopBackOff   6  
 then, to resolve this issue scale down etcd cluster to 0 and scale it back to 3.
 - To scale down etcd cluster to 0:
 ```console
-$ kubectl scale sts --namespace px-backup px-central-backup-etcd --replicas=0`
+$ kubectl scale sts --namespace px-backup pxc-backup-etcd --replicas=0`
 ```
 
 - To scale up etcd cluster to 3:
 ```console
-$ kubectl scale sts --namespace px-backup px-central-backup-etcd --replicas=3`
+$ kubectl scale sts --namespace px-backup pxc-backup-etcd --replicas=3`
 ```
