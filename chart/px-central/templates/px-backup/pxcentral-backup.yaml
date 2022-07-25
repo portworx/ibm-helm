@@ -1,6 +1,6 @@
 {{/* Setting defaults if they are omitted. */}}
 {{- $pxBackupEnabled := .Values.pxbackup.enabled | default false }}
-{{- $mongodbEnabled := eq .Values.pxbackup.datastore "mongodb" }}
+{{- $isOpenshiftCluster := .Capabilities.APIVersions.Has "apps.openshift.io/v1" -}}
 {{- if eq $pxBackupEnabled true }}
 apiVersion: v1
 kind: ServiceAccount
@@ -10,6 +10,42 @@ metadata:
   labels:
     app.kubernetes.io/component: px-backup
 {{- include "px-central.labels" . | nindent 4 }}
+---
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: px-backup-cluster-role
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: px-backup
+{{- include "px-central.labels" . | nindent 4 }}
+rules:
+  - apiGroups: ["apiextensions.k8s.io"]
+    resources: ["customresourcedefinitions"]
+    verbs: ["create", "update", "get", "patch", "list", "watch"]
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["namespaces"]
+    verbs: ["get", "list"]
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: px-backup-cluster-role-binding
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: pxcentral-apiserver
+{{- include "px-central.labels" . | nindent 4 }}
+subjects:
+  - kind: ServiceAccount
+    name: px-backup-account
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: px-backup-cluster-role
+  apiGroup: rbac.authorization.k8s.io
 ---
 kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
@@ -22,10 +58,25 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["secrets"]
-    verbs: ["get", "create", "delete", "update"]
+    verbs: ["get", "create", "delete", "update", "list"]
   - apiGroups: [""]
     resources: ["configmaps"]
-    verbs: ["get", "update"]
+    verbs: ["get", "update", "create"]
+  - apiGroups: ["batch"]
+    resources: ["jobs"]
+    verbs: ["get", "create", "delete", "update"]
+  - apiGroups: ["batch"]
+    resources: ["cronjobs"]
+    verbs: ["get", "create", "delete", "update"]
+  - apiGroups: ["kdmp.portworx.com"]
+    resources: ["backuplocationmaintenances"]
+    verbs: ["get", "create", "delete", "update"]
+  - apiGroups: ["kdmp.portworx.com"]
+    resources: ["volumebackupdeletes"]
+    verbs: ["get", "create", "delete", "update"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list"]
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -125,10 +176,8 @@ spec:
               fieldPath: metadata.namespace
         - name: PX_BACKUP_DEFAULT_ORG
           value: {{ .Values.pxbackup.orgName }}
-        {{- if eq $mongodbEnabled true }}
         - name: PX_BACKUP_DEFAULT_DATASTORE
           value: mongodb
-        {{- end}}
         {{- if .Values.caCertsSecretName }}
         - name: SSL_CERT_DIR
           value: /tmp/certs
@@ -162,12 +211,8 @@ spec:
         command:
         - /px-backup
         - start
-        {{- if eq $mongodbEnabled true }}
         - --datastoreEndpoints=mongodb://pxbackup:Password1@pxc-backup-mongodb-0.pxc-backup-mongodb-headless:27017,pxc-backup-mongodb-1.pxc-backup-mongodb-headless:27017,pxc-backup-mongodb-2.pxc-backup-mongodb-headless:27017/?authSource=px-backup&replicaSet=rs0
         - --mongo-migration={{.Values.pxbackup.mongoMigration}}
-        {{- else }}
-        - --datastoreEndpoints=etcd:http://pxc-backup-etcd-0.pxc-backup-etcd-headless:2379,etcd:http://pxc-backup-etcd-1.pxc-backup-etcd-headless:2379,etcd:http://pxc-backup-etcd-2.pxc-backup-etcd-headless:2379
-        {{- end }}
       {{- if .Values.caCertsSecretName }}
       volumes:
         - name: ssl-cert-dir
@@ -181,6 +226,11 @@ spec:
         {{- range $sec := .Values.images.pullSecrets }}
         - name: {{ $sec | quote }}
         {{- end }}
+      {{- end }}
+      {{- if $isOpenshiftCluster}}
+      {{- else }}
+      securityContext:
+{{ toYaml .Values.securityContext | indent 8 }}
       {{- end }}
 ---
 {{- end -}}

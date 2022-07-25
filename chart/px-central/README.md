@@ -277,26 +277,6 @@ Note: Keycloak auth and Grafana UI will be accessible on same endpoint on differ
    $ kubectl logs -f --namespace {{ .Release.Namespace }} -ljob-name=pxcentral-post-install-hook
    ```
 
-2. If one or many pods of the etcd replica goes into `CrashLoopBackOff` state during install or upgrade and error looks like following:
-```
-pxc-backup-etcd-1                          0/1     CrashLoopBackOff   6          10m
-[root@ip-node1 helm]# kubectl logs pxc-backup-etcd-1 -n px-backup
-==> Bash debug is off
-==> Detected data from previous deployments...
-==> Adding new member to existing cluster...
-```
-
-then, to resolve this issue scale down etcd cluster to 0 and scale it back to 3.
-- To scale down etcd cluster to 0:
-```console
-$ kubectl scale sts --namespace central pxc-backup-etcd --replicas=0`
-```
-
-- To scale up etcd cluster to 3:
-```console
-$ kubectl scale sts --namespace central pxc-backup-etcd --replicas=3`
-```
-
 # PX-Monitor
 
 Using PX-Monitor, you can manage and monitor portworx cluster metrics.
@@ -507,11 +487,12 @@ Parameter | Description | Default
 `persistentStorage.enabled` | Enable persistent storage | `true`
 `persistentStorage.storageClassName` | Provide storage class name which exists | `""`
 `persistentStorage.mysqlVolumeSize` | MySQL volume size | `"100Gi"`
-`persistentStorage.etcdVolumeSize` | ETCD volume size | `"64Gi"`
 `persistentStorage.keycloakThemeVolumeSize` | Keycloak frontend theme volume size | `"5Gi"`
 `persistentStorage.keycloakBackendVolumeSize` | Keycloak backend volume size | `"10Gi"`
 `storkRequired` | Scheduler name as stork | `false`
-`nodeAffinityLabel` | Label for node affinity for px-central components| `""`
+`nodeAffinityLabel` | Label for node affinity for px-central components | `""`
+`podAntiAffinity` | PodAntiAffinity will make sure pods are distributed | `false`
+`useIPV6` | Enable IPv6 support for PX-Central | `false`
 `pxcentralDBPassword` | PX-Central cluster store mysql database password | `Password1`
 `caCertsSecretName` | Name of the Kubernetes Secret, which contains the CA Certificates. | `""`
 `oidc` | Enable OIDC for PX-Central and PX-backup for RBAC | `""`
@@ -531,6 +512,8 @@ Parameter | Description | Default
 `oidc.externalOIDC.endpoint` | External OIDC endpoint | `""`
 `securityContext` | Security context for the pod | `{runAsUser: 1000, fsGroup: 1000, runAsNonRoot: true}`
 `postInstallJob.sslEnabled` | k8s apis with ssl enabled in post-install-job pod | `true`
+`service.pxCentralUIServiceType` | service type of PX-Central UI | `"LoadBalancer"`
+`service.pxCentralUIServiceAnnotations` | annotations for PX-Central UI service | `"{}"`
 `images.pullSecrets` | Image pull secrets | `docregistry-secret`
 `images.pullPolicy` | Image pull policy | `Always`
 `images.pxcentralApiServerImage.registry` | API server image registry | `docker.io`
@@ -581,18 +564,19 @@ Parameter | Description | Default
 `images` | PX-Backup deployment images | `""`
 `pxbackup.enabled` | Enabled PX-Backup | `false`
 `pxbackup.orgName` | PX-Backup organization name | `default`
+`pxbackup.mongoMigration` | flag for mongo migration while upgrading PX-Backup from 1.2.x to 2.x.x | `complete`
+`persistentStorage.mongodbVolumeSize` | mongodb volume size | `"64Gi"`
+`persistentStorage.mongoCacheSize` | mongodb cache size in GB | `"4"`
+`service.pxBackupUIServiceType` | service type of PX-Backup UI | `"LoadBalancer"`
+`service.pxBackupUIServiceAnnotations` | annotations for the PX-Backup UI service | `"{}"`
 `images.pxBackupImage.registry` | PX-Backup image registry | `docker.io`
 `images.pxBackupImage.repo` | PX-Backup image repo | `portworx`
 `images.pxBackupImage.imageName` | PX-Backup image name | `px-backup`
 `images.pxBackupImage.tag` | PX-Backup image tag | `1.2.2`
-`images.etcdImage.registry` | PX-Backup etcd image registry | `docker.io`
-`images.etcdImage.repo` | PX-Backup etcd image repo | `bitnami`
-`images.etcdImage.imageName` | PX-Backup etcd image name | `etcd`
-`images.etcdImage.tag` | PX-Backup etcd image tag | `3.4.13-debian-10-r22`
-`images.mongodbImage.registry` | PX-Backup etcd image registry | `docker.io`
-`images.mongodbImage.repo` | PX-Backup etcd image repo | `bitnami`
-`images.mongodbImage.imageName` | PX-Backup etcd image name | `mongodb`
-`images.mongodbImage.tag` | PX-Backup etcd image tag | `4.4.4-debian-10-r30`
+`images.mongodbImage.registry` | PX-Backup mongodb image registry | `docker.io`
+`images.mongodbImage.repo` | PX-Backup mongodb image repo | `bitnami`
+`images.mongodbImage.imageName` | PX-Backup mongodb image name | `mongodb`
+`images.mongodbImage.tag` | PX-Backup mongodb image tag | `4.4.4-debian-10-r30`
 
 ### PX-Monitor parameters
 
@@ -611,14 +595,68 @@ Parameter | Description | Default
 `clusterDomain` | Cluster domain | `cluster.local`
 `cassandraUsername` | Cassandra cluster username | `cassandra`
 `cassandraPassword` | Cassandra cluster password | `cassandra`
+`cassandra.jvm.maxHeapSize` | Cassandra jvm maximum heap size | `""`
+`cassandra.jvm.newHeapSize` | Cassandra jvm new heap size | `""`
 `persistentStorage` | Persistent storage for all px-central px-monitor components | `""`
 `persistentStorage.enabled` | Enable persistent storage | `false`
 `persistentStorage.storageClassName` | Provide storage class name which exists | `""`
-`persistentStorage.cassandra.storage` | Cassandra volumes size | `8Gi`
+`persistentStorage.cassandra.storage` | Cassandra volumes size | `64Gi`
 `persistentStorage.grafana.storage` | Grafana volumes size | `20Gi`
 `persistentStorage.consul.storage` | Consul volumes size | `8Gi`
+`persistentStorage.alertManager.storage` | AlertManager volume size | `2Gi`
+`persistentStorage.ingester.storage` | ingester volume size | `2Gi`
 `securityContext` | Security context for the pod | `{runAsUser: 1000, fsGroup: 1000, runAsNonRoot: true}`
+`service.grafanaServiceType` | service type of grafana | `"NodePort"`
+`service.cortexNginxServiceType` | service type of cortex nginx | `"NodePort"`
 `images` | PX monitor stack images | ``
+`images.cortexImage.registry` | PX-Monitor Cortex image registry | `docker.io`
+`images.cortexImage.repo` | PX-Monitor Cortex image repo | `portworx`
+`images.cortexImage.imageName` | PX-Monitor Cortex image name | `cortex`
+`images.cortexImage.tag` | PX-Monitor Cortex image tag | `v1.11.1`
+`images.cassandraImage.registry` | PX-Monitor cassandra image registry | `docker.io`
+`images.cassandraImage.repo` | PX-Monitor cassandra image repo | `portworx`
+`images.cassandraImage.imageName` | PX-Monitor cassandra image name | `cassandra`
+`images.cassandraImage.tag` | PX-Monitor cassandra image tag | `4.0.4-debian-11-r0`
+`images.proxyConfigImage.registry` | PX-Monitor proxy config image registry | `docker.io`
+`images.proxyConfigImage.repo` | PX-Monitor proxy config image repo | `portworx`
+`images.proxyConfigImage.imageName` | PX-Monitor proxy config image name | `nginx`
+`images.proxyConfigImage.tag` | PX-Monitor proxy config image tag | `1.22.0-alpine`
+`images.consulImage.registry` | PX-Monitor Consul image registry | `docker.io`
+`images.consulImage.repo` | PX-Monitor Consul image repo | `portworx`
+`images.consulImage.imageName` | PX-Monitor Consul image name | `consul`
+`images.consulImage.tag` | PX-Monitor Consul image tag | `1.12.2-debian-11-r0`
+`images.dnsmasqImage.registry` | PX-Monitor dnsmasq image registry | `docker.io`
+`images.dnsmasqImage.repo` | PX-Monitor dnsmasq image repo | `portworx`
+`images.dnsmasqImage.imageName` | PX-Monitor dnsmasq image name | `go-dnsmasq`
+`images.dnsmasqImage.tag` | PX-Monitor dnsmasq image tag | `release-1.0.7-v2`
+`images.grafanaImage.registry` | PX-Monitor grafana image registry | `docker.io`
+`images.grafanaImage.repo` | PX-Monitor grafana image repo | `portworx`
+`images.grafanaImage.imageName` | PX-Monitor grafana image name | `grafana`
+`images.grafanaImage.tag` | PX-Monitor grafana image tag | `8.5.3`
+`images.prometheusImage.registry` | PX-Monitor prometheus image registry | `docker.io`
+`images.prometheusImage.repo` | PX-Monitor prometheus image repo | `portworx`
+`images.prometheusImage.imageName` | PX-Monitor prometheus image name | `prometheus`
+`images.prometheusImage.tag` | PX-Monitor prometheus image tag | `v2.35.0`
+`images.prometheusConfigReloadrImage.registry` | PX-Monitor prometheus config reloader image registry | `docker.io`
+`images.prometheusConfigReloadrImage.repo` | PX-Monitor prometheus config reloader image repo | `portworx`
+`images.prometheusConfigReloadrImage.imageName` | PX-Monitor prometheus config reloader image name | `prometheus-config-reloader`
+`images.prometheusConfigReloadrImage.tag` | PX-Monitor prometheus config reloader image tag | `v0.56.3`
+`images.prometheusOperatorImage.registry` | PX-Monitor prometheus operator image registry | `docker.io`
+`images.prometheusOperatorImage.repo` | PX-Monitor prometheus operator image repo | `portworx`
+`images.prometheusOperatorImage.imageName` | PX-Monitor prometheus operator image name | `prometheus-operator`
+`images.prometheusOperatorImage.tag` | PX-Monitor prometheus operator image tag | `v0.56.3`
+`images.memcachedMetricsImage.registry` | PX-Monitor memcached metrics image registry | `docker.io`
+`images.memcachedMetricsImage.repo` | PX-Monitor memcached metrics image repo | `portworx`
+`images.memcachedMetricsImage.imageName` | PX-Monitor memcached metrics image name | `memcached-exporter`
+`images.memcachedMetricsImage.tag` | PX-Monitor memcached metrics image tag | `v0.9.0`
+`images.memcachedIndexImage.registry` | PX-Monitor memcached index image registry | `docker.io`
+`images.memcachedIndexImage.repo` | PX-Monitor memcached index image repo | `portworx`
+`images.memcachedIndexImage.imageName` | PX-Monitor memcached index image name | `memcached`
+`images.memcachedIndexImage.tag` | PX-Monitor memcached index image tag | `1.6.15-alpine`
+`images.memcachedImage.registry` | PX-Monitor memcached image registry | `docker.io`
+`images.memcachedImage.repo` | PX-Monitor memcached image repo | `portworx`
+`images.memcachedImage.imageName` | PX-Monitor memcached image name | `memcached`
+`images.memcachedImage.tag` | PX-Monitor memcached image tag | `1.6.15-alpine`
 `images.pullSecrets` | Image pull secret | `docregistry-secret`
 `images.pullPolicy` | Image pull policy | `Always`
 
