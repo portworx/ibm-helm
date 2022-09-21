@@ -35,9 +35,9 @@ internalKVDB: false                   # internal KVDB
 
 etcd:
   secret: none                       # Secret name where the username, password and CA cert for ETCD authentication is stored
-imageVersion: 2.9.1.4                   # Version of the PX Image.
-pxOperatorImageVersion: 1.9.0           # Version of the PX operator image.
-changePortRange: false               #change start range to 17000
+imageVersion: 2.11.0               # Version of the PX Image.
+pxOperatorImageVersion: 1.9.0        # Version of the PX operator image.
+changePortRange: false               # change start range to 17000
 enablePVCController: false           # enable PVC Controller when running on OCP 4.3 or above or on IKS VPC Gen2
 
 telemetry: false                      # Telemetry support
@@ -49,3 +49,8 @@ serviceAccount:
 
 deleteStrategy:                           # Delete strategy for the portworx cluster
   type:                                   # Valid values: Uninstall, UninstallAndWipe
+
+
+kvdbDevice: 
+
+maxStorageNodesPerZone: 1

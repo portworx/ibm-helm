@@ -52,7 +52,6 @@ metadata:
     chart: "{{.Chart.Name}}-{{.Chart.Version}}"
     app.kubernetes.io/managed-by: {{.Release.Service | quote }}
     app.kubernetes.io/instance: {{.Release.Name | quote }}
-
 spec:
   image: portworx/oci-monitor:{{ required "A valid Image tag is required in the SemVer format" .Values.imageVersion }}
   imagePullPolicy: Always
@@ -65,7 +64,6 @@ spec:
   {{- if eq $changePortRange true }}
   startPort: 17001
   {{- end }}
-
   kvdb:
   {{- if eq $internalKVDB true }}
     internal: true
@@ -81,22 +79,32 @@ spec:
       {{- end }}
     {{- end }}
   {{- end }}
-
-  storage:
-    {{- if ne $metadataSize 0 }}
-    systemMetadataDevice: {{ printf "size=%d" (int64 $metadataSize) }}
-    {{- end }}
-    {{- if ne $journalDevice "none" }}
-    journalDevice: {{ $journalDevice }}
-    {{- end }}
-    {{- if not (eq $drives "none") }}
-    devices:
+{{- if and (ne $drives "none") (not (hasPrefix "/" $drives)) }}
+  cloudStorage:
+    deviceSpecs:
       {{- $driveNames := $drives | split ";" }}
       {{- range $index, $name := $driveNames }}
       - {{ $name }}
       {{- end }}
+    {{- if and (ne $kvdbDevice "none") (not (hasPrefix "/" $kvdbDevice)) }}
+    kvdbDeviceSpec: {{ $kvdbDevice }}
     {{- end }}
-    {{- if eq $usefileSystemDrive true }}
+    {{- if and (ne $journalDevice "none") (not (hasPrefix "/" $journalDevice)) }}
+    journalDeviceSpec: {{ $journalDevice }}
+    {{- end }}
+    {{- if ne (.Values.maxStorageNodesPerZone | int) 0 }}
+    maxStorageNodesPerZone: {{ .Values.maxStorageNodesPerZone }}
+    {{- end }}
+{{- else }}
+  storage:
+    {{- if hasPrefix "/" $drives }}
+    devices:
+      {{- $driveNames := $drives | split ";" }}
+        {{- range $index, $name := $driveNames }}
+        - {{ $name }}
+        {{- end }}
+    {{- end }}
+    {{- if $usefileSystemDrive }}
     forceUseDisks: true
     {{- end }}
     {{- if eq $usedrivesAndPartitions true }}
@@ -104,10 +112,13 @@ spec:
     {{- else }}
     useAll: true
     {{- end }}
-    {{- if ne $kvdbDevice "none" }}
+    {{- if and (ne $kvdbDevice "none") (hasPrefix "/" $kvdbDevice) }}
     kvdbDevice: {{ $kvdbDevice }}
     {{- end }}
-
+    {{- if and (ne $journalDevice "none") (or (hasPrefix "/" $journalDevice) (eq "auto" $journalDevice)) }}
+    journalDevice: {{ $journalDevice }}
+    {{- end }}
+{{- end }}
   {{- if or (ne $dataInterface "none") (ne $managementInterface "none") }}
   network:
     {{- if ne $dataInterface "none" }}
@@ -121,8 +132,7 @@ spec:
   {{- if ne $secretType "none" }}
   secretsProvider: {{$secretType}}
   {{- end }}
-
-  {{ if or (or (or (or (not (eq $envVars "none")) (not (eq $etcdSecret "none"))) (eq $csiCloudDrive true)) (eq $icrRegistry true)) (ne $licenseSecret "none") }}
+  {{- if or (or (or (or (not (eq $envVars "none")) (not (eq $etcdSecret "none"))) (eq $csiCloudDrive true)) (eq $icrRegistry true)) (ne $licenseSecret "none") }}
   env:
   {{ if not (eq $envVars "none") }}
     {{- $vars := $envVars | split ";" }}
@@ -130,7 +140,7 @@ spec:
     {{- $envVariable := $val | split "=" }}
     - name: {{ $envVariable._0 | trim | quote }}
       value: {{ $envVariable._1 | trim | quote }}
-    {{ end }}
+    {{- end }}
   {{- end }}
   {{- if not (eq $etcdSecret "none") }}
     - name: ETCD_USERNAME
@@ -160,7 +170,6 @@ spec:
           key: accountKey
   {{- end }}
   {{- end }}
-
   stork:
     enabled: true
     {{- if .Values.storkVersion }}
