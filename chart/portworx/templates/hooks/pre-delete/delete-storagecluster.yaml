@@ -5,7 +5,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: kube-system
+  namespace: {{ template "px.getDeploymentNamespace" . }}
   name: px-hook-delete-storagecluster
   labels:
     heritage: {{.Release.Service | quote }}

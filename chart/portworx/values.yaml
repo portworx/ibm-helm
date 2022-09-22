@@ -27,6 +27,7 @@ registrySecret:
 
 icrRegistry: 
 icrSecret: 
+isOCP: false
 
 aut: false                           # Enable AutoPilot
 csi: false                           # Enable CSI
