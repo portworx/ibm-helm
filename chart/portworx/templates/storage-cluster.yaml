@@ -134,7 +134,7 @@ spec:
   {{- end }}
   {{- if or (or (or (or (not (eq $envVars "none")) (not (eq $etcdSecret "none"))) (eq $csiCloudDrive true)) (eq $icrRegistry true)) (ne $licenseSecret "none") }}
   env:
-  {{ if not (eq $envVars "none") }}
+  {{- if not (eq $envVars "none") }}
     {{- $vars := $envVars | split ";" }}
     {{- range $key, $val := $vars }}
     {{- $envVariable := $val | split "=" }}
