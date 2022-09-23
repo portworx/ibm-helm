@@ -3,9 +3,9 @@ entries:
   portworx:
   - apiVersion: v1
     appVersion: 2.11.0
-    created: "2022-09-21T11:42:35.153488215-06:00"
+    created: "2022-09-22T22:15:45.082343043-06:00"
     description: A Helm chart for installing Portworx on Kubernetes.
-    digest: a120b42b618e4be0389e6fd9486f6d17564f0fc4e2e3db424520812493946541
+    digest: d84352fa286060ad9ce1a9e1f989dbe9e38e0c719af859849988d324abd47d21
     home: https://portworx.com/
     icon: https://raw.githubusercontent.com/portworx/helm/master/doc/media/k8s-porx.png
     keywords:
@@ -35,7 +35,7 @@ entries:
     version: 1.0.36
   - apiVersion: v1
     appVersion: 2.7.2
-    created: "2022-09-21T11:42:35.149110054-06:00"
+    created: "2022-09-22T22:15:45.078116508-06:00"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 090b4576ab5cacc3457af6bbd4bf4c8b2f1ea60d2e8167b870c1ebbaa8b8c1e9
     home: https://portworx.com/
@@ -71,4 +71,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/portworx/ibm-helm/PWX-22984/repo/beta/portworx-1.0.26.tgz
     version: 1.0.26
-generated: "2022-09-21T11:42:35.146906378-06:00"
+generated: "2022-09-22T22:15:45.072439898-06:00"
