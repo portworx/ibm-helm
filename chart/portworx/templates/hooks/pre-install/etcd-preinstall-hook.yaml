@@ -4,7 +4,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  namespace: kube-system
+  namespace: {{ template "px.getDeploymentNamespace" . }}
   name: px-hook-etcd-preinstall
   labels:
 {{- include "px.labels" . | nindent 4 }}
@@ -21,7 +21,7 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kubernetes.io/arch
+              - key: beta.kubernetes.io/arch
                 operator: In
                 values:
                 - amd64
