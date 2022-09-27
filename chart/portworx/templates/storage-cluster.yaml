@@ -20,6 +20,7 @@
   {{- $icrRegistry := .Values.icrRegistry | default false }}
   {{- $icrSecret := .Values.icrSecret | default "default/all-icr-io" }}
   {{- $csiCloudDrive := .Values.csiCloudDrive | default false }}
+  {{- $isOCP := .Values.isOCP | default false}}
   {{- $internalKVDB := .Values.internalKVDB | default false }}
   {{- $etcdSecret := .Values.etcd.secret | default "none" }}
   {{- $changePortRange := .Values.changePortRange | default false }}
@@ -29,7 +30,7 @@ kind: StorageCluster
 apiVersion: core.libopenstorage.org/v1
 metadata:
   name: "{{ required "Clustername cannot be empty" .Values.clusterName }}"
-  namespace: kube-system
+  namespace: {{ template "px.getDeploymentNamespace" . }}
   annotations:
     {{- if or (ne $advOpts "none") (ne $etcdSecret "none") }}
       {{- if ne $etcdSecret "none" }}
@@ -41,6 +42,9 @@ metadata:
     {{- if eq true $pvcControllerEnabled }}
     portworx.io/pvc-controller: "true"
     {{- end }}
+    {{- if eq true $isOCP }}
+    portworx.io/is-openshift: "true"
+    {{- end}}
     portworx.io/is-iks: "true"
     {{- if lookup "apps/v1" "DaemonSet" "kube-system" "portworx" }}
     portworx.io/migration-approved: "false"

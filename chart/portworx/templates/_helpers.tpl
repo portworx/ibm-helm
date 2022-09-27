@@ -136,6 +136,15 @@ productVersion: {{ .Values.imageVersion }}
 {{- end -}}
 {{- end -}}
 
+{{- define "px.getDeploymentNamespace" -}}
+{{- if (.Release.Namespace) -}}
+    {{- if (eq "default" .Release.Namespace) -}}
+        {{- printf "kube-system"  -}}
+    {{- else -}}
+        {{- printf "%s" .Release.Namespace -}}
+    {{- end -}}
+{{- end -}}
+{{- end -}}
 
 {{/*
 Create the name of the service account to use for hooks
