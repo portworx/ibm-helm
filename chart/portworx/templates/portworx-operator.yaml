@@ -4,24 +4,6 @@ metadata:
   name: portworx-operator
   namespace: {{ template "px.getDeploymentNamespace" . }}
 ---
-apiVersion: policy/v1beta1
-kind: PodSecurityPolicy
-metadata:
-  name: px-operator
-spec:
-  allowPrivilegeEscalation: false
-  readOnlyRootFilesystem: false
-  volumes:
-    - secret
-  runAsUser:
-    rule: 'RunAsAny'
-  seLinux:
-    rule: 'RunAsAny'
-  supplementalGroups:
-    rule: 'RunAsAny'
-  fsGroup:
-    rule: 'RunAsAny'
----
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
@@ -30,10 +12,6 @@ rules:
   - apiGroups: ["*"]
     resources: ["*"]
     verbs: ["*"]
-  - apiGroups: ["policy"]
-    resources: ["podsecuritypolicies"]
-    resourceNames: ["px-operator"]
-    verbs: ["use"]
 ---
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1

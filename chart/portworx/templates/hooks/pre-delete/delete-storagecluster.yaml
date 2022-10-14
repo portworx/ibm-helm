@@ -32,4 +32,4 @@ spec:
           image: {{ template "px.getK8KubectlImage" . }}:{{ template "px.getKubectlVersion" . }}
           command: ['/bin/sh',
                     '-c',
-                    'kubectl -n kube-system delete storagecluster {{ $clusterName }} --ignore-not-found']
+                    'kubectl -n {{ template "px.getDeploymentNamespace" . }} delete storagecluster {{ $clusterName }} --ignore-not-found']
