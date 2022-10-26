@@ -194,13 +194,13 @@ spec:
       enabled: true
   {{- end }}
 
-  {{- if (and (.Values.csi) (eq .Values.csi true))}}
+  {{- if or (eq .Values.csi true) (eq .Values.csi false) }}
   csi:
-    enabled: true
+    enabled: {{ .Values.csi }}
   {{- end }}
-  {{- if (and (.Values.aut) (eq .Values.aut true))}}
+  {{- if or (eq .Values.aut true) (eq .Values.aut false) }}
   autopilot:
-    enabled: true
+    enabled: {{ .Values.aut }}
   {{- end }}
 
   {{- with .Values.tolerations }}
