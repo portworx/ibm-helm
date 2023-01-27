@@ -55,3 +55,4 @@ serviceAccount:
 deleteStrategy:                      # Delete strategy for the portworx cluster
   type:                              # Valid values: Uninstall, UninstallAndWipe
 
+kubeletDir: /var/lib/kubelet         # custom kubelet dir
