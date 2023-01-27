@@ -55,3 +55,4 @@ serviceAccount:
 deleteStrategy:                      # Delete strategy for the portworx cluster
   type:                              # Valid values: Uninstall, UninstallAndWipe
 
+kubeletDir: /var/data/kubelet         # custom kubelet dir. NOTE: this differs from system to system, on IKS and OCP on IBM it defaults to /var/data/kubelet as it has softlink /var/lib/kubelet that points to /var/data/kubelet
