@@ -161,8 +161,6 @@ spec:
   {{- if eq $csiCloudDrive true }}
     - name: ENABLE_CSI_DRIVE
       value: "{{ $csiCloudDrive }}"
-    - name: KUBELET_DIR
-      value: "{{ $kubeletDir }}"
   {{- end }}
   {{- if eq $icrRegistry true }}
     - name: REGISTRY_SECRET
