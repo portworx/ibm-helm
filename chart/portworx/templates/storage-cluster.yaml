@@ -136,15 +136,12 @@ spec:
   {{- if ne $secretType "none" }}
   secretsProvider: {{$secretType}}
   {{- end }}
+  {{- if or (or (or (or (not (eq $envVars "none")) (not (eq $etcdSecret "none"))) (eq $csiCloudDrive true)) (eq $icrRegistry true)) (ne $licenseSecret "none") }}
   env:
-  {{- $IS_PX_SECRETS_NAMESPACE_SET := false }}
   {{- if not (eq $envVars "none") }}
     {{- $vars := $envVars | split ";" }}
     {{- range $key, $val := $vars }}
     {{- $envVariable := $val | split "=" }}
-    {{- if eq $envVariable._0 "PX_SECRETS_NAMESPACE" }}
-      {{- $IS_PX_SECRETS_NAMESPACE_SET = true}}
-    {{- end }}
     - name: {{ $envVariable._0 | trim | quote }}
       value: {{ $envVariable._1 | trim | quote }}
     {{- end }}
@@ -176,9 +173,6 @@ spec:
           name: "{{ $licenseSecret }}"
           key: accountKey
   {{- end }}
-  {{- if eq $IS_PX_SECRETS_NAMESPACE_SET false}}
-    - name: "PX_SECRETS_NAMESPACE"
-      value: "portworx"
   {{- end }}
   stork:
     enabled: true
