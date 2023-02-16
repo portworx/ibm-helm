@@ -25,6 +25,7 @@
   {{- $etcdSecret := .Values.etcd.secret | default "none" }}
   {{- $changePortRange := .Values.changePortRange | default false }}
   {{- $pvcControllerEnabled := .Values.enablePVCController | default false }}
+  {{- $pxSecretsNamespace := .Values.pxSecretsNamespace | default "portworx" }}
 
 kind: StorageCluster
 apiVersion: core.libopenstorage.org/v1
@@ -136,7 +137,6 @@ spec:
   {{- if ne $secretType "none" }}
   secretsProvider: {{$secretType}}
   {{- end }}
-  {{- if or (or (or (or (not (eq $envVars "none")) (not (eq $etcdSecret "none"))) (eq $csiCloudDrive true)) (eq $icrRegistry true)) (ne $licenseSecret "none") }}
   env:
   {{- if not (eq $envVars "none") }}
     {{- $vars := $envVars | split ";" }}
@@ -173,7 +173,8 @@ spec:
           name: "{{ $licenseSecret }}"
           key: accountKey
   {{- end }}
-  {{- end }}
+    - name: "PX_SECRETS_NAMESPACE"
+      value: "{{ $pxSecretsNamespace }}"
   stork:
     enabled: true
     {{- if .Values.storkVersion }}
