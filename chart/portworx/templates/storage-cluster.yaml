@@ -138,6 +138,8 @@ spec:
   secretsProvider: {{$secretType}}
   {{- end }}
   env:
+    - name: KUBELET_DIR
+      value: "/var/data/kubelet"
   {{- if not (eq $envVars "none") }}
     {{- $vars := $envVars | split ";" }}
     {{- range $key, $val := $vars }}
