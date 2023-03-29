@@ -1,0 +1,36 @@
+apiVersion: v1
+entries:
+  portworx:
+  - apiVersion: v1
+    appVersion: 3.0.0
+    created: "2023-03-29T09:36:02.321756+05:30"
+    description: A Helm chart for installing Portworx on Kubernetes.
+    digest: 3054d1d5e74aeee6454cb7c591a2432c014a53257b0f456b004c8d082d2a2dfd
+    home: https://portworx.com/
+    icon: https://raw.githubusercontent.com/portworx/helm/master/doc/media/k8s-porx.png
+    keywords:
+    - Storage
+    - ICP
+    - IKS
+    - persistent disk
+    - pvc
+    - cloud native storage
+    - persistent storage
+    - portworx
+    - amd64
+    - Commercial
+    kubeVersion: '>=1.10.0'
+    maintainers:
+    - email: vshinde@purestorage.com
+      name: Vinayak Shinde
+    - email: aditya@portworx.com
+      name: Aditya Dani
+    - email: tapas@portworx.com
+      name: Tapas Sharma
+    name: portworx
+    sources:
+    - https://github.com/portworx/helm
+    urls:
+    - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/beta/portworx-1.0.45.tgz
+    version: 1.0.45
+generated: "2023-03-29T09:36:02.311079+05:30"

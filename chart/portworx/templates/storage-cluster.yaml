@@ -191,11 +191,13 @@ spec:
         path: /lib/modules
         type: Directory
   {{- end }}
-  {{- if eq $telemetry true}}
   monitoring:
     telemetry:
+      {{- if eq $telemetry true}}
       enabled: true
-  {{- end }}
+      {{- else }}
+      enabled: false
+      {{- end }}
 
   {{- if or (eq .Values.csi true) (eq .Values.csi false) }}
   csi:
