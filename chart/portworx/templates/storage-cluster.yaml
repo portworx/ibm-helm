@@ -160,6 +160,10 @@ spec:
           key: "password"
           name: "{{ $etcdSecret }}"
   {{- end }}
+  {{- if eq true $isOCP }}
+    - name: MIRRORS_SERVER
+      value: https://px-mirror.storage.cloud.ibm.com
+  {{- end}}
   {{- if eq $csiCloudDrive true }}
     - name: ENABLE_CSI_DRIVE
       value: "{{ $csiCloudDrive }}"
