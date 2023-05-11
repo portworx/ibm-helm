@@ -30,9 +30,12 @@
 kind: StorageCluster
 apiVersion: core.libopenstorage.org/v1
 metadata:
-  name: "{{ required "Clustername cannot be empty" .Values.clusterName }}"
+  name: {{ template "px.clusterName" . | required "Clustername cannot be empty" }}
   namespace: {{ template "px.getDeploymentNamespace" . }}
   annotations:
+    {{- if not (regexMatch "^[a-z0-9]+(?:[-.][a-z0-9]+)*$" .Values.clusterName) }}
+    portworx.io/cluster-id: {{ .Values.clusterName }}
+    {{- end }}
     {{- if or (ne $advOpts "none") (ne $etcdSecret "none") }}
       {{- if ne $etcdSecret "none" }}
     portworx.io/misc-args: "-userpwd $(ETCD_USERNAME):$(ETCD_PASSWORD) -ca /etc/pwx/etcdcerts/ca.pem {{ cat $advOpts | replace "none" ""}}"

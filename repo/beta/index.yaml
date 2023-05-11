@@ -2,10 +2,10 @@ apiVersion: v1
 entries:
   portworx:
   - apiVersion: v1
-    appVersion: 2.13.2
-    created: "2023-04-11T16:57:09.098519+05:30"
+    appVersion: 2.13.3
+    created: "2023-05-09T06:58:53.752247974Z"
     description: A Helm chart for installing Portworx on Kubernetes.
-    digest: 3f439ac3333c99f4fba05d155a6cba687629400b03f797986f952adba61610c8
+    digest: 5cfaf3dea9ffd2ab53117983fdf2a7a3d2fa3d4f9aa1eca93ed051cbf7992bfc
     home: https://portworx.com/
     icon: https://raw.githubusercontent.com/portworx/helm/master/doc/media/k8s-porx.png
     keywords:
@@ -31,11 +31,43 @@ entries:
     sources:
     - https://github.com/portworx/helm
     urls:
-    - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/beta/portworx-1.0.46.tgz
+    - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/beta/portworx-1.0.47.tgz
+    version: 1.0.47
+  - apiVersion: v1
+    appVersion: 2.13.2
+    created: "2023-05-09T06:58:53.750768667Z"
+    description: A Helm chart for installing Portworx on Kubernetes.
+    digest: fde15194a0a51b01da7a8ac5d6a6b28197f4dbb72f1193036dc57692b60f835e
+    home: https://portworx.com/
+    icon: https://raw.githubusercontent.com/portworx/helm/master/doc/media/k8s-porx.png
+    keywords:
+    - Storage
+    - ICP
+    - IKS
+    - persistent disk
+    - pvc
+    - cloud native storage
+    - persistent storage
+    - portworx
+    - amd64
+    - Commercial
+    kubeVersion: '>=1.10.0'
+    maintainers:
+    - email: vshinde@purestorage.com
+      name: Vinayak Shinde
+    - email: aditya@portworx.com
+      name: Aditya Dani
+    - email: tapas@portworx.com
+      name: Tapas Sharma
+    name: portworx
+    sources:
+    - https://github.com/portworx/helm
+    urls:
+    - https://raw.githubusercontent.com/portworx/ibm-helm/PWX-30832/repo/beta/portworx-1.0.46.tgz
     version: 1.0.46
   - apiVersion: v1
     appVersion: 3.0.0
-    created: "2023-04-11T16:57:09.095726+05:30"
+    created: "2023-05-09T06:58:53.749321966Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 3054d1d5e74aeee6454cb7c591a2432c014a53257b0f456b004c8d082d2a2dfd
     home: https://portworx.com/
@@ -65,4 +97,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/beta/portworx-1.0.45.tgz
     version: 1.0.45
-generated: "2023-04-11T16:57:09.088339+05:30"
+generated: "2023-05-09T06:58:53.747435122Z"
