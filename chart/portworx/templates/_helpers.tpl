@@ -221,3 +221,8 @@ Populate the ports based on deployemnt environment
     {{- printf "9021" -}}
 {{- end -}}
 {{- end -}}
+
+{{- define "px.clusterName" -}}
+{{ $match := regexReplaceAll "[^A-Za-z0-9._-]+" .Values.clusterName "" }}
+{{- printf "%s" $match | lower | replace "_" "-" -}}
+{{- end -}}
