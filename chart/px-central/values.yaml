@@ -136,27 +136,27 @@ images:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-api
-    tag: 2.5.1
+    tag: 2.6.0
   pxcentralFrontendImage:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-ui-frontend
-    tag: 2.5.1
+    tag: 2.6.0
   pxcentralBackendImage:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-ui-backend
-    tag: 2.5.1
+    tag: 2.6.0
   pxcentralMiddlewareImage:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-ui-lhbackend
-    tag: 2.5.1
+    tag: 2.6.0
   postInstallSetupImage:
     registry: docker.io
     repo: portworx
     imageName: pxcentral-onprem-post-setup
-    tag: 2.5.1
+    tag: 2.6.0
   keycloakBackendImage:
     registry: docker.io
     repo: portworx
@@ -188,12 +188,12 @@ images:
     registry: docker.io
     repo: portworx
     imageName: px-backup
-    tag: 2.5.1
+    tag: 2.6.0
   mongodbImage:
     registry: docker.io
     repo: portworx
     imageName: mongodb
-    tag: 5.0.14-debian-11-r27
+    tag: 5.0.20-debian-11-r13
 
   ## Images required for enabling px-license-server
   licenseServerImage:
