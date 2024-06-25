@@ -151,27 +151,27 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-api
-    tag: 2.7.0
+    tag: 2.7.1
   pxcentralFrontendImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-frontend
-    tag: 2.7.0
+    tag: 2.7.1
   pxcentralBackendImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-backend
-    tag: 2.7.0
+    tag: 2.7.1
   pxcentralMiddlewareImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-lhbackend
-    tag: 2.7.0
+    tag: 2.7.1
   postInstallSetupImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-post-setup
-    tag: 2.7.0
+    tag: 2.7.1
   keycloakBackendImage:
     registry: icr.io/ext
     repo: portworx
@@ -186,7 +186,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: keycloak-login-theme
-    tag: 2.7.0
+    tag: 2.7.1
   keycloakInitContainerImage:
     registry: icr.io/ext
     repo: portworx
@@ -203,7 +203,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: px-backup
-    tag: 2.7.0
+    tag: 2.7.1
   mongodbImage:
     registry: icr.io/ext
     repo: portworx
