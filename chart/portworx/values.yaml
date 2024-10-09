@@ -21,7 +21,7 @@ secretType: none                     # Defaults to None, but can be aws-kms/vaul
 envVars: none                        # NOTE: This is a ";" seperated list of environment variables. For eg: MYENV1=myvalue1;MYENV2=myvalue2
 advOpts: none
 
-storkVersion: 24.3.0                 # Defaults to empty, operator will get the version from manifest based on portworx image version.
+storkVersion: 24.3.1                 # Defaults to empty, operator will get the version from manifest based on portworx image version.
 
 customRegistryURL: 
 registrySecret:
@@ -31,7 +31,7 @@ icrSecret:
 isOCP: false
 
 aut: false                           # Enable AutoPilot
-csi: false                           # Enable CSI
+csi: true                            # Enable CSI
 csiCloudDrive: false
 
 internalKVDB: false                  # internal KVDB
