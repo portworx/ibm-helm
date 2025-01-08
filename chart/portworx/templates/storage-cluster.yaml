@@ -53,6 +53,12 @@ metadata:
     {{- if lookup "apps/v1" "DaemonSet" "kube-system" "portworx" }}
     portworx.io/migration-approved: "false"
     {{- end }}
+    {{- if eq .Values.nonDisruptivek8sUpgrade true }}
+    portworx.io/disable-non-disruptive-upgrade: "false"
+    {{- end }}
+    {{- if eq .Values.skipHealthChecks true }}
+    portworx.io/health-check: "skip"
+    {{- end }}
     portworx.io/service-type: "portworx-service:NodePort;portworx-api:ClusterIP"
   labels:
     heritage: {{.Release.Service | quote }}
@@ -69,6 +75,28 @@ spec:
   {{- if not (eq $registrySecret "none") }}
   imagePullSecret: {{ $registrySecret }}
   {{- end }}
+
+  {{- if (or (eq (toString .Values.updateStrategy.type) "RollingUpdate") (eq (toString .Values.updateStrategy.type) "OnDelete")) }}
+  updateStrategy:
+    type: {{ .Values.updateStrategy.type }}
+    {{- if eq .Values.updateStrategy.type "RollingUpdate"}}
+    rollingUpdate:
+      {{- if .Values.updateStrategy.maxUnavailable}}
+      maxUnavailable: {{.Values.updateStrategy.maxUnavailable}}
+      {{- end}}
+      {{- if .Values.updateStrategy.minReadySeconds}}
+      minReadySeconds: {{.Values.updateStrategy.minReadySeconds}}
+      {{- end}}
+      {{- if and (not (eq .Values.updateStrategy.disruption.allow nil)) (or (eq .Values.updateStrategy.disruption.allow true) (eq .Values.updateStrategy.disruption.allow false)) }}
+      disruption:
+        allow: {{.Values.updateStrategy.disruption.allow}}
+      {{- end}}
+    {{- end}}
+  {{- end }}
+
+  {{- if .Values.updateStrategy.autoUpdateComponents}}
+  autoUpdateComponents: {{.Values.updateStrategy.autoUpdateComponents}}
+  {{- end}}
   {{- if eq $changePortRange true }}
   startPort: 17001
   {{- end }}
