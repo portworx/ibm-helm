@@ -273,7 +273,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-hook
-    tag: 2.8.3
+    tag: 2.9.0-test
     module: pxCentral
   mysqlInitImage:
     registry: icr.io/ext
