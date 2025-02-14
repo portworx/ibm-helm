@@ -272,7 +272,7 @@ images:
   preSetupHookImage:
     registry: icr.io/ext
     repo: portworx
-    imageName: pxcentral-onprem-hook
+    imageName: pxcentral-onprem-hook-base
     tag: 2.9.0-test
     module: pxCentral
   mysqlInitImage:
