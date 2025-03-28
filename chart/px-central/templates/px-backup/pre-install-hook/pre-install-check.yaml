@@ -281,6 +281,8 @@ spec:
               value: {{ .Values.pxlicenseserver.enabled | default false | quote }}
             - name: DOCREGISTRY_SECRET_NAME
               value: {{ .Values.images.pullSecrets | first }}
+            - name: IBM_SECRET_NAME
+              value: "{{ .Values.ibmCloudSecretName }}"
             - name: INSECURE_REGISTRY
               value: {{ .Values.images.insecureRegistry | default false | quote }}
             - name: SKIP_VALIDATIONS
