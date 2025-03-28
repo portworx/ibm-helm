@@ -186,6 +186,8 @@ clusterDomain: "cluster.local"
 cassandraUsername: cassandra
 cassandraPassword: cassandra
 
+ibmCloudSecretName: "all-icr-io"
+
 operatorToChartUpgrade: false
 
 securityContext:
