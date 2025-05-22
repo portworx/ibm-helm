@@ -1,5 +1,5 @@
 name: portworx
-version: 1.0.69
+version: 1.0.70
 description: A Helm chart for installing Portworx on Kubernetes.
 kubeVersion: ">=1.26.0-0"
 appVersion: "3.2.3"
