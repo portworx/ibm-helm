@@ -7,7 +7,27 @@ data:
   versions.yaml: |
     version: {{ .Values.imageVersion }}
     components:
-      {{- if eq .Values.imageVersion "3.2.3" }}
+      {{- if eq .Values.imageVersion "3.3.0.1" }}
+      stork: openstorage/stork:25.2.2
+      autopilot: portworx/autopilot:1.3.17
+      clusterDiags: portworx/cluster-diags:3.3.0
+      csiNodeDriverRegistrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.13.0
+      csiProvisioner: registry.k8s.io/sig-storage/csi-provisioner:v5.2.0
+      csiResizer: registry.k8s.io/sig-storage/csi-resizer:v1.13.2
+      csiSnapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v8.2.0
+      csiSnapshotController: registry.k8s.io/sig-storage/snapshot-controller:v8.2.0
+      prometheus: quay.io/prometheus/prometheus:v3.4.0
+      prometheusOperator: quay.io/prometheus-operator/prometheus-operator:v0.82.2
+      prometheusConfigReloader: quay.io/prometheus-operator/prometheus-config-reloader:v0.82.2
+      alertManager: quay.io/prometheus/alertmanager:v0.28.1
+      telemetry: portworx/ccm-go:1.2.2
+      pxLibUpdate: portworx/px-lib:pxfslibs-3.3.0-mver12-update
+      metricsCollector: portworx/realtime-metrics:1.0.31
+      telemetryProxy: purestorage/telemetry-envoy:1.1.16
+      logUploader: portworx/log-upload:px-1.1.40
+      dynamicPlugin: portworx/portworx-dynamic-plugin:1.1.4
+      dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
+      {{- else if eq .Values.imageVersion "3.2.3" }}
       stork: openstorage/stork:25.2.2
       autopilot: portworx/autopilot:1.3.16
       csiNodeDriverRegistrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.12.0
