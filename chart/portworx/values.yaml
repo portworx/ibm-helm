@@ -36,13 +36,18 @@ csiCloudDrive: false
 
 internalKVDB: false                  # internal KVDB
 kvdbDevice:                          # specify a separate device to store KVDB data, only used when internalKVDB is set to true
+internalKvdbTls: false               # Enable TLS for internal KVDB
+migrateToKvdbTls: false              # Enable migration to KVDB TLS, requires internalKvdbTls to be true
 
 maxStorageNodesPerZone: 1            # The maximum number of storage nodes desired per zone, in case of cloud drive provisioning
 
+installCertManager: false            # Install PX managed cert-manager
+
 etcd:
   secret: none                       # Secret name where the username, password and CA cert for ETCD authentication is stored
-imageVersion: 3.3.0.1                # Version of the PX Image.
-pxOperatorImageVersion: 25.2.1       # Version of the PX operator image.
+
+imageVersion: 3.3.1                  # Version of the PX Image.
+pxOperatorImageVersion: 25.2.2       # Version of the PX operator image.
 changePortRange: false               # change start range to 17000
 enablePVCController: false           # enable PVC Controller when running on OCP 4.3 or above or on IKS VPC Gen2
 
