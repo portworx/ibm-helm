@@ -170,12 +170,20 @@ spec:
               value: {{ .Values.pxbackup.enabled | default false | quote }}
             - name: PX_MONITOR_ENABLED
               value: {{ .Values.pxmonitor.enabled | default false | quote }}
+            - name: PX_LICENSE_SERVER_ENABLED
+              value: {{ .Values.pxlicenseserver.enabled | default false | quote }}
+            - name: PROXY_CONFIG_SECRET_NAME
+              value: {{ .Values.proxy.configSecretName | default "" | quote }}
         {{- if eq $deployDedicatedMonitoringSystem true }}
             - name: DEDICATED_PROMETHEUS
               value: "true"
         {{- else }}
             - name: DEDICATED_PROMETHEUS
               value: "false"
+            - name: PROMETHEUS_ENDPOINT
+              value: {{ .Values.pxbackup.prometheusEndpoint | default "" | quote }}
+            - name: ALERTMANAGER_ENDPOINT
+              value: {{ .Values.pxbackup.alertmanagerEndpoint | default "" | quote }}
         {{- end }}
             - name: MINIMUM_KUBERNETES_VERSION
               value: "{{ $minimumKubernetesVersion }}"
@@ -186,15 +194,30 @@ spec:
             - name: SKIP_VALIDATIONS
               value: {{ .Values.pxbackup.skipValidations | default false | quote }}
             {{- if or (empty .Values.proxy.includeNoProxyList) (has "pre-install-check" .Values.proxy.includeNoProxyList) }}
-            {{- include "proxy.noProxyEnv" . | nindent 12 }}
+            {{- include "proxy.proxyEnv" . | nindent 12 }}
             {{- end }}
           volumeMounts:
             - name: data-volume
               mountPath: /mnt/data
+          {{- if .Values.proxy.configSecretName }}
+            - mountPath: /etc/ssl/certs/proxy-ca.pem
+              subPath: proxy-ca.pem
+              name: proxy-ca-volume
+              readOnly: true
+          {{- end }}
       volumes:
         - name: data-volume
           persistentVolumeClaim:
             claimName: pre-install-data-pvc
+      {{- if .Values.proxy.configSecretName }}
+        - name: proxy-ca-volume
+          secret:
+            items:
+            - key: CA
+              path: proxy-ca.pem
+            optional: true
+            secretName: {{ .Values.proxy.configSecretName }}
+      {{- end }}
       {{- if .Values.images.pullSecrets }}
       imagePullSecrets:
         {{- range $sec := .Values.images.pullSecrets }}
@@ -264,7 +287,7 @@ spec:
             - name: JOB_TIMEOUT_SECONDS
               value: "600"
             {{- if or (empty .Values.proxy.includeNoProxyList) (has "preflight-check" .Values.proxy.includeNoProxyList) }}
-            {{- include "proxy.noProxyEnv" . | nindent 12 }}
+            {{- include "proxy.proxyEnv" . | nindent 12 }}
             {{- end }}
             - name: STORAGE_CLASS
               value: {{ .Values.persistentStorage.storageClassName }}
@@ -281,11 +304,29 @@ spec:
               value: {{ .Values.pxlicenseserver.enabled | default false | quote }}
             - name: DOCREGISTRY_SECRET_NAME
               value: {{ .Values.images.pullSecrets | first }}
+            - name: IBM_SECRET_NAME
+              value: "{{ .Values.ibmCloudSecretName }}"
             - name: INSECURE_REGISTRY
               value: {{ .Values.images.insecureRegistry | default false | quote }}
             - name: SKIP_VALIDATIONS
               value: {{ .Values.pxbackup.skipValidations | default false | quote }}
-          volumeMounts: []
+          volumeMounts:
+          {{- if .Values.proxy.configSecretName }}
+            - mountPath: /etc/ssl/certs/proxy-ca.pem
+              subPath: proxy-ca.pem
+              name: proxy-ca-volume
+              readOnly: true
+          {{- end }}
+      volumes:
+      {{- if .Values.proxy.configSecretName }}
+        - name: proxy-ca-volume
+          secret:
+            items:
+            - key: CA
+              path: proxy-ca.pem
+            optional: true
+            secretName: {{ .Values.proxy.configSecretName }}
+      {{- end }}
       {{- if .Values.images.pullSecrets }}
       imagePullSecrets:
         {{- range $sec := .Values.images.pullSecrets }}
@@ -318,6 +359,10 @@ rules:
   - apiGroups: [ "" ]
     resources: [ "namespaces" ]
     verbs: [ "get" ]
+  - apiGroups: [ "" ]
+    resources: [ "secrets" ]
+    resourceNames: [ "all-icr-io" ]
+    verbs: [ "get", "list" ]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -337,6 +382,43 @@ subjects:
 roleRef:
   kind: ClusterRole
   name: px-backup-pre-setup-clusterrole
+  apiGroup: rbac.authorization.k8s.io
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: px-backup-pre-setup-role
+  namespace: {{ .Release.Namespace }}
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "0"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+  labels:
+    name: pxcentral-pre-setup-hook
+    app.kubernetes.io/component: pxcentral-pre-setup-hook
+rules:
+  - apiGroups: [ "" ]
+    resources: [ "serviceaccounts" ]
+    verbs: [ "get", "patch", "update" ]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: px-backup-pre-setup-rolebinding
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "1"
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+  labels:
+    name: pxcentral-pre-setup-hook
+    app.kubernetes.io/component: pxcentral-pre-setup-hook
+subjects:
+  - kind: ServiceAccount
+    name: default
+    namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: Role
+  name: px-backup-pre-setup-role
   apiGroup: rbac.authorization.k8s.io
 
 {{- end }}
