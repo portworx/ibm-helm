@@ -1,3 +1,7 @@
+{{- if and .Values.migrateToKvdbTls (not .Values.internalKvdbTls) }}
+{{- fail "migrateToKvdbTls requires internalKvdbTls to be enabled. Please set internalKvdbTls to true." }}
+{{- end }}
+
 {{- if or (not (lookup "apps/v1" "DaemonSet" "kube-system" "portworx")) (default true .Values.generateStorageClusterForMigration) }}
 
   {{- $telemetry := .Values.telemetry | default false }}
@@ -59,6 +63,9 @@ metadata:
     {{- if eq .Values.skipHealthChecks true }}
     portworx.io/health-check: "skip"
     {{- end }}
+    {{- if eq .Values.migrateToKvdbTls true }}
+    portworx.io/migration-to-kvdb-tls: "true"
+    {{- end }}
     portworx.io/service-type: "portworx-service:NodePort;portworx-api:ClusterIP"
   labels:
     heritage: {{.Release.Service | quote }}
@@ -103,6 +110,9 @@ spec:
   kvdb:
   {{- if eq $internalKVDB true }}
     internal: true
+    {{- if eq .Values.internalKvdbTls true }}
+    enableTLS: true
+    {{- end }}
   {{- else }}
     internal: false
     {{- if empty $etcdEndPoints }}
@@ -114,6 +124,10 @@ spec:
       - {{$val}}
       {{- end }}
     {{- end }}
+  {{- end }}
+  {{- if eq .Values.installCertManager true }}
+  certManager:
+    enabled: true
   {{- end }}
 {{- if and (ne $drives "none") (not (hasPrefix "/" $drives)) }}
   cloudStorage:
