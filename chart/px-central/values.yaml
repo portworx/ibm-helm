@@ -416,3 +416,8 @@ images:
       mongodb7: 7.0.15-debian-12-r2
       mongodb8: 8.0.9-debian-12-r1
     module: pxBackup
+
+# Use these fields for manual installation of Portworx
+createOSBSecret: false               # Create the OSB secret
+resourceCrn: none                    # The resource CRN for the Portworx cluster
+planId: none                        # The plan ID for the Portworx cluster
