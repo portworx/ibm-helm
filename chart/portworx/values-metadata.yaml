@@ -34,7 +34,30 @@ clusterName:
     immutable: false
     required: false
 
-
+icrRegistry:
+  __metadata:
+    name: "icrRegistry"
+    label: "Use IBM registry(icr.io)"
+    description: "Select true to use IBM registry(icr.io)"
+    type: "boolean"
+    immutable: false
+    required: false
+icrSecret:
+  __metadata:
+    name: "icrSecret"
+    label: "IBM registry (icr.io) secret"
+    description: "IBM registry (icr.io) secret name and its namespace to pull the images. For example default/all-icr-io, where default is namespace and the all-icr.io is the secret name"
+    type: "string"
+    immutable: false
+    required: false
+isOCP:
+  __metadata:
+    name: "isOCP"
+    label: "Is RedHat OpenShift Cluster(ROKS)"
+    description: "Select true if the target cluster is RedHat OpenShift Cluster on IBM Cloud(ROKS)"
+    type: "boolean"
+    immutable: false
+    required: false
 storage:
   __metadata:
     name: "storage"
@@ -196,6 +219,16 @@ csi:
     type: "boolean"
     immutable: false
     required: false
+
+csiCloudDrive:
+  __metadata:
+    name: "csiCloudDrive"
+    label: "Install CSI (Container Storage Interface) Cloud Drive"
+    description: "Select true if you want to install CSI (Container Storage Interface) Cloud Drive."
+    type: "boolean"
+    immutable: false
+    required: false
+
 
 internalKVDB:
   __metadata:
