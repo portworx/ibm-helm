@@ -229,7 +229,6 @@ csiCloudDrive:
     immutable: false
     required: false
 
-
 internalKVDB:
   __metadata:
     name: "internalKVDB"
