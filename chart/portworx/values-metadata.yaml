@@ -42,6 +42,7 @@ icrRegistry:
     type: "boolean"
     immutable: false
     required: false
+
 icrSecret:
   __metadata:
     name: "icrSecret"
@@ -50,6 +51,7 @@ icrSecret:
     type: "string"
     immutable: false
     required: false
+
 isOCP:
   __metadata:
     name: "isOCP"
@@ -58,6 +60,7 @@ isOCP:
     type: "boolean"
     immutable: false
     required: false
+
 storage:
   __metadata:
     name: "storage"
@@ -109,9 +112,6 @@ storage:
       type: "number"
       immutable: false
       required: false
-
-
-
 
 network:
   __metadata:
