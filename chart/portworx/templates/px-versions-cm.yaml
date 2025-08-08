@@ -7,7 +7,7 @@ data:
   versions.yaml: |
     version: {{ .Values.imageVersion }}
     components:
-      {{- if eq .Values.imageVersion "3.3.1" }}
+      {{- if eq .Values.imageVersion "3.3.1.2" }}
       stork: openstorage/stork:25.3.0
       autopilot: portworx/autopilot:1.3.17
       clusterDiags: portworx/cluster-diags:3.3.0
