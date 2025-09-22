@@ -66,6 +66,9 @@ metadata:
     {{- if eq .Values.migrateToKvdbTls true }}
     portworx.io/migration-to-kvdb-tls: "true"
     {{- end }}
+    {{- if eq .Values.migrateToComponentK8sConfig true }}
+    portworx.io/migrate-configs: "true"
+    {{- end }}
     portworx.io/service-type: "portworx-service:NodePort;portworx-api:ClusterIP"
   labels:
     heritage: {{.Release.Service | quote }}
