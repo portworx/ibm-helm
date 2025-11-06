@@ -23,11 +23,11 @@ advOpts: none
 
 storkVersion: 25.4.1                 # Defaults to empty, operator will get the version from manifest based on portworx image version.
 
-customRegistryURL: 
+customRegistryURL:
 registrySecret:
 
-icrRegistry: 
-icrSecret: 
+icrRegistry:
+icrSecret:
 isOCP: false
 
 aut: false                           # Enable AutoPilot
@@ -39,7 +39,7 @@ kvdbDevice:                          # specify a separate device to store KVDB d
 internalKvdbTls: false               # Enable TLS for internal KVDB
 migrateToKvdbTls: false              # Enable migration to KVDB TLS, requires internalKvdbTls to be true
 
-maxStorageNodesPerZone: 1            # The maximum number of storage nodes desired per zone, in case of cloud drive provisioning
+initialStorageNodes: 3               # Number of initial storage nodes, in case of cloud drive provisioning
 
 installCertManager: false            # Install PX managed cert-manager
 
@@ -64,11 +64,11 @@ deleteStrategy:                      # Delete strategy for the portworx cluster
 nonDisruptivek8sUpgrade: false          # By default, S&P upgrades are disabled. To enable them, set this to true
 skipHealthChecks: false                 # Used to skip health checks. By default, health checks are enabled. Set this to true to disable health checks
 
-updateStrategy:   
+updateStrategy:
   type:                                   # portworx supports the following update strategies- RollingUpdate and OnDelete
 
   # maxUnavailable and minReadySeconds applicable only on selecting type RollingUpdate
-  disruption: 
+  disruption:
     allow:                                # This field is used to enable smart and parallel upgrade. Smart upgrade is disabled by default,
                                           # Enable it by setting to false. we can use the `maxUnavailable` field to control the maximum number of Portworx nodes that can be upgraded at a time.
 
