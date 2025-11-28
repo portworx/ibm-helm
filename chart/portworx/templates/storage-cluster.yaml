@@ -145,8 +145,8 @@ spec:
     {{- if and (ne $journalDevice "none") (not (hasPrefix "/" $journalDevice)) }}
     journalDeviceSpec: {{ $journalDevice }}
     {{- end }}
-    {{- if ne (.Values.maxStorageNodesPerZone | int) 0 }}
-    maxStorageNodesPerZone: {{ .Values.maxStorageNodesPerZone }}
+    {{- if ne (.Values.initialStorageNodes | int) 0 }}
+    initialStorageNodes: {{ .Values.initialStorageNodes }}
     {{- end }}
 {{- else }}
   storage:
