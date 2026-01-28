@@ -46,7 +46,7 @@ installCertManager: false            # Install PX managed cert-manager
 etcd:
   secret: none                       # Secret name where the username, password and CA cert for ETCD authentication is stored
 
-imageVersion: 3.5.1                # Version of the PX Image.
+imageVersion: 3.5.2                  # Version of the PX Image.
 pxOperatorImageVersion: 25.5.1       # Version of the PX operator image.
 changePortRange: false               # change start range to 17000
 enablePVCController: false           # enable PVC Controller when running on OCP 4.3 or above or on IKS VPC Gen2
