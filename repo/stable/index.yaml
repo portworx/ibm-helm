@@ -2,8 +2,42 @@ apiVersion: v1
 entries:
   portworx:
   - apiVersion: v1
+    appVersion: 3.6.0
+    created: "2026-04-09T09:17:39.279213547Z"
+    description: A Helm chart for installing Portworx on Kubernetes.
+    digest: f0b404dfd687f908e9c144c248ec660782c529e4989a9437aebc72bee5756007
+    home: https://portworx.com/
+    icon: https://raw.githubusercontent.com/portworx/helm/master/doc/media/k8s-porx.png
+    keywords:
+    - Storage
+    - ICP
+    - IKS
+    - persistent disk
+    - pvc
+    - cloud native storage
+    - persistent storage
+    - portworx
+    - amd64
+    - Commercial
+    kubeVersion: '>=1.26.0-0'
+    maintainers:
+    - email: vshinde@purestorage.com
+      name: Vinayak Shinde
+    - email: aditya@portworx.com
+      name: Aditya Dani
+    - email: pragrawal@purestorage.com
+      name: Pradyuman Agrawal
+    - email: navkumar@purestorage.com
+      name: Sangi Naveen Kumar
+    name: portworx
+    sources:
+    - https://github.com/portworx/helm
+    urls:
+    - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/portworx-1.0.85.tgz
+    version: 1.0.85
+  - apiVersion: v1
     appVersion: 3.5.2.1
-    created: "2026-03-31T11:19:44.935419+05:30"
+    created: "2026-04-09T09:17:39.272328243Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 809584e882b4457dfa34247de5374fcb3e2bfc28bd183af37685b611d15615ea
     home: https://portworx.com/
@@ -37,7 +71,7 @@ entries:
     version: 1.0.84
   - apiVersion: v1
     appVersion: 3.5.2
-    created: "2026-03-31T11:19:44.933321+05:30"
+    created: "2026-04-09T09:17:39.261444645Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 6c014b2089d0e47521763dc217caaf875f6aaee886e0727ae4e7452c9735f504
     home: https://portworx.com/
@@ -71,7 +105,7 @@ entries:
     version: 1.0.83
   - apiVersion: v1
     appVersion: 3.5.1
-    created: "2026-03-31T11:19:44.930329+05:30"
+    created: "2026-04-09T09:17:39.251777061Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: ebaecb12ea706aa394c193239e6c5857d561fd0b8be13b93bbad241b96577e34
     home: https://portworx.com/
@@ -105,7 +139,7 @@ entries:
     version: 1.0.82
   - apiVersion: v1
     appVersion: 3.5.0
-    created: "2026-03-31T11:19:44.927367+05:30"
+    created: "2026-04-09T09:17:39.24516024Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 02f4aad1d3f0a34a7cc8b217b0740e3b37a6dda972e64caf26022148c431cff0
     home: https://portworx.com/
@@ -139,7 +173,7 @@ entries:
     version: 1.0.81
   - apiVersion: v1
     appVersion: 3.4.1
-    created: "2026-03-31T11:19:44.92485+05:30"
+    created: "2026-04-09T09:17:39.23772955Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 002b0546fd041b68dd47784d106c295550d33914b5b8d6ab18cdf52dc5271658
     home: https://portworx.com/
@@ -173,7 +207,7 @@ entries:
     version: 1.0.80
   - apiVersion: v1
     appVersion: 3.4.0.1
-    created: "2026-03-31T11:19:44.921072+05:30"
+    created: "2026-04-09T09:17:39.224758509Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 9328ee584ce8229b6a2000cc788404345f47b2ffb9215a5d0c33594ad370d0ef
     home: https://portworx.com/
@@ -207,7 +241,7 @@ entries:
     version: 1.0.79
   - apiVersion: v1
     appVersion: 3.4.0.1
-    created: "2026-03-31T11:19:44.918496+05:30"
+    created: "2026-04-09T09:17:39.21407911Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 0d86aa278bb6e7418c73b7d5a2633e501436ceb2780144d8e1bd89755a656b88
     home: https://portworx.com/
@@ -241,7 +275,7 @@ entries:
     version: 1.0.78
   - apiVersion: v1
     appVersion: 3.4.0
-    created: "2026-03-31T11:19:44.915897+05:30"
+    created: "2026-04-09T09:17:39.207026287Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 75438a623295ed61842a4e472684927a6b467085330f00958369b972fe54276c
     home: https://portworx.com/
@@ -275,7 +309,7 @@ entries:
     version: 1.0.77
   - apiVersion: v1
     appVersion: 3.3.1.3
-    created: "2026-03-31T11:19:44.913411+05:30"
+    created: "2026-04-09T09:17:39.201369378Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 69eafe87fdb7cbaec5f8e629ec3e30c6c47a6c3a45b869d81780dcf5157fd574
     home: https://portworx.com/
@@ -309,7 +343,7 @@ entries:
     version: 1.0.76
   - apiVersion: v1
     appVersion: 3.3.1.2
-    created: "2026-03-31T11:19:44.910169+05:30"
+    created: "2026-04-09T09:17:39.189638933Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 4aefef3cb74f897bd5e323be626ae78b1b74df0479fd6101113c828dab9582bb
     home: https://portworx.com/
@@ -343,7 +377,7 @@ entries:
     version: 1.0.75
   - apiVersion: v1
     appVersion: 3.3.1
-    created: "2026-03-31T11:19:44.907664+05:30"
+    created: "2026-04-09T09:17:39.179557429Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 6d4bb6ded3a1b2fbaf18fc7940857fd2afc6d875545b87c2f6f676333e563c79
     home: https://portworx.com/
@@ -377,7 +411,7 @@ entries:
     version: 1.0.74
   - apiVersion: v1
     appVersion: 3.3.1
-    created: "2026-03-31T11:19:44.904822+05:30"
+    created: "2026-04-09T09:17:39.173535043Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 91bd8b845e17723304e83b9deda5a4d42c45aefacfd71c7082af4b4399a3284a
     home: https://portworx.com/
@@ -411,7 +445,7 @@ entries:
     version: 1.0.73
   - apiVersion: v1
     appVersion: 3.3.1
-    created: "2026-03-31T11:19:44.902279+05:30"
+    created: "2026-04-09T09:17:39.166733111Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: b7603852f3cf7f340bbc909158e1a95948b0efb535a890fb865828c2277e8946
     home: https://portworx.com/
@@ -445,7 +479,7 @@ entries:
     version: 1.0.72
   - apiVersion: v1
     appVersion: 3.3.0.1
-    created: "2026-03-31T11:19:44.8994+05:30"
+    created: "2026-04-09T09:17:39.156048879Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 825ba1c9858068f2602653334d528b298e933db00dbb6f37a189496c8c371664
     home: https://portworx.com/
@@ -479,7 +513,7 @@ entries:
     version: 1.0.71
   - apiVersion: v1
     appVersion: 3.2.3
-    created: "2026-03-31T11:19:44.896589+05:30"
+    created: "2026-04-09T09:17:39.147214049Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: d8df3f9018161d563e01f07927c2e2a4be8c94bf583b83f7de89283b38445698
     home: https://portworx.com/
@@ -511,7 +545,7 @@ entries:
     version: 1.0.70
   - apiVersion: v1
     appVersion: 3.2.3
-    created: "2026-03-31T11:19:44.891521+05:30"
+    created: "2026-04-09T09:17:39.12392708Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 819be3d506640f208ae984c9ca699824aaced6d425e2bb2837fcf8ae9dcbca73
     home: https://portworx.com/
@@ -543,7 +577,7 @@ entries:
     version: 1.0.69
   - apiVersion: v1
     appVersion: 3.2.2
-    created: "2026-03-31T11:19:44.888654+05:30"
+    created: "2026-04-09T09:17:39.115185413Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 5193beeb52bcae637bc3431ddc17c2d0849d7ef4e2cbc16138efc46aa96c4211
     home: https://portworx.com/
@@ -575,7 +609,7 @@ entries:
     version: 1.0.68
   - apiVersion: v1
     appVersion: 3.2.2
-    created: "2026-03-31T11:19:44.88611+05:30"
+    created: "2026-04-09T09:17:39.102532518Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 10dc5fcf00e3a393f8f4473cee6571841460f9ddb3054a0d4f8c517c5dce3ebc
     home: https://portworx.com/
@@ -607,7 +641,7 @@ entries:
     version: 1.0.67
   - apiVersion: v1
     appVersion: 3.2.1.2
-    created: "2026-03-31T11:19:44.883088+05:30"
+    created: "2026-04-09T09:17:39.095124038Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 790a4b188f1390574882e171ec22d9b321cf266c9a62d50fc1583bfaad639b67
     home: https://portworx.com/
@@ -639,7 +673,7 @@ entries:
     version: 1.0.66
   - apiVersion: v1
     appVersion: 3.2.1.1
-    created: "2026-03-31T11:19:44.881848+05:30"
+    created: "2026-04-09T09:17:39.089080466Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 9f268b04c7eeb1da48cf0729ab04f3e7ccbbb29ce72387d053dfb208c6be167b
     home: https://portworx.com/
@@ -671,7 +705,7 @@ entries:
     version: 1.0.65
   - apiVersion: v1
     appVersion: 3.2.1
-    created: "2026-03-31T11:19:44.880153+05:30"
+    created: "2026-04-09T09:17:39.084449361Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 4fbbc922661ef7dd81d488223c5277d43d76379df3ce1026ef8c510212ddf149
     home: https://portworx.com/
@@ -703,7 +737,7 @@ entries:
     version: 1.0.64
   - apiVersion: v1
     appVersion: 3.2.1
-    created: "2026-03-31T11:19:44.878715+05:30"
+    created: "2026-04-09T09:17:39.08008915Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: bd3be7126498764be341ada8ec8f6feef318d78d7404ac5383222930e1933065
     home: https://portworx.com/
@@ -735,7 +769,7 @@ entries:
     version: 1.0.63
   - apiVersion: v1
     appVersion: 3.2.0
-    created: "2026-03-31T11:19:44.877625+05:30"
+    created: "2026-04-09T09:17:39.075681197Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: a2fb6ae4bfbcbdea9a80b86210cf8a8a19b15089668bf0f86ea311c3d51c134a
     home: https://portworx.com/
@@ -767,7 +801,7 @@ entries:
     version: 1.0.62
   - apiVersion: v1
     appVersion: 3.1.6
-    created: "2026-03-31T11:19:44.876522+05:30"
+    created: "2026-04-09T09:17:39.073119927Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: a6801c4202ce284f8b125e1758a2886ea1a1ba299d47145e3fbf5a8add101451
     home: https://portworx.com/
@@ -799,7 +833,7 @@ entries:
     version: 1.0.61
   - apiVersion: v1
     appVersion: 3.1.6
-    created: "2026-03-31T11:19:44.875433+05:30"
+    created: "2026-04-09T09:17:39.070442144Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 659329b08b4ffbc55dd676f5b7fb6d71ee391f5840e94cc4e981743d5baf52c2
     home: https://portworx.com/
@@ -831,7 +865,7 @@ entries:
     version: 1.0.60
   - apiVersion: v1
     appVersion: 3.1.5
-    created: "2026-03-31T11:19:44.873426+05:30"
+    created: "2026-04-09T09:17:39.065956745Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 272c3dbeb16942ae2fe75373bac4517ff18d107163c99002873730c342ba3470
     home: https://portworx.com/
@@ -863,7 +897,7 @@ entries:
     version: 1.0.59
   - apiVersion: v1
     appVersion: 3.1.4
-    created: "2026-03-31T11:19:44.872294+05:30"
+    created: "2026-04-09T09:17:39.062385281Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 4d031154d3aa8eaadbca372ec1e8bb26e708b8e2f14e3cd4cc4279f26dd35944
     home: https://portworx.com/
@@ -895,7 +929,7 @@ entries:
     version: 1.0.58
   - apiVersion: v1
     appVersion: 3.1.4
-    created: "2026-03-31T11:19:44.871044+05:30"
+    created: "2026-04-09T09:17:39.057363591Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: a1b08cf4df8704a9c6df4865b8e81204b7611651051e3628d778f7fc5595cde5
     home: https://portworx.com/
@@ -927,7 +961,7 @@ entries:
     version: 1.0.57
   - apiVersion: v1
     appVersion: 3.1.3
-    created: "2026-03-31T11:19:44.869943+05:30"
+    created: "2026-04-09T09:17:39.052976107Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 230729f298a08026e9cd537b9ad1ac9797fae5e4db86a202b1cefa5cd753d558
     home: https://portworx.com/
@@ -959,7 +993,7 @@ entries:
     version: 1.0.56
   - apiVersion: v1
     appVersion: 3.1.2
-    created: "2026-03-31T11:19:44.868538+05:30"
+    created: "2026-04-09T09:17:39.04862971Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: b72b3221898eead565ebc075b53cef85e60411da929e077432301fc0f2b1bf96
     home: https://portworx.com/
@@ -991,7 +1025,7 @@ entries:
     version: 1.0.55
   - apiVersion: v1
     appVersion: 3.1.0.1
-    created: "2026-03-31T11:19:44.867443+05:30"
+    created: "2026-04-09T09:17:39.044098553Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: c32e196c863dbd644589fb36869aed1346fb78fd74798a816fe85fe9e93d1bd6
     home: https://portworx.com/
@@ -1023,7 +1057,7 @@ entries:
     version: 1.0.54
   - apiVersion: v1
     appVersion: 3.1.0.1
-    created: "2026-03-31T11:19:44.866338+05:30"
+    created: "2026-04-09T09:17:39.040158694Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: cacf9b11bb8d6fffafe7dcad22b877684670954003635c0c11784e3aa8f61520
     home: https://portworx.com/
@@ -1055,7 +1089,7 @@ entries:
     version: 1.0.53
   - apiVersion: v1
     appVersion: 3.1.0.1
-    created: "2026-03-31T11:19:44.865222+05:30"
+    created: "2026-04-09T09:17:39.035360641Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 3a02cd36f93efd25a39fe7c90103edf22886ef32085afdfd5be02d24de9552ad
     home: https://portworx.com/
@@ -1087,7 +1121,7 @@ entries:
     version: 1.0.52
   - apiVersion: v1
     appVersion: 3.1.0
-    created: "2026-03-31T11:19:44.864143+05:30"
+    created: "2026-04-09T09:17:39.033451543Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 1f20c42fa57617c2dd8b625dd8953746dc1185a1062aaa74ccd3371b22c6213c
     home: https://portworx.com/
@@ -1119,7 +1153,7 @@ entries:
     version: 1.0.51
   - apiVersion: v1
     appVersion: 3.0.4
-    created: "2026-03-31T11:19:44.863442+05:30"
+    created: "2026-04-09T09:17:39.030528492Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: b656ba1738e0ecb9cba95b0f93ffb5eafcfbfe3fe0211d7e89d2983d00357d6e
     home: https://portworx.com/
@@ -1151,7 +1185,7 @@ entries:
     version: 1.0.50
   - apiVersion: v1
     appVersion: 3.0.2
-    created: "2026-03-31T11:19:44.862143+05:30"
+    created: "2026-04-09T09:17:39.024762495Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: a8cb98716070d7e90139f58ce63d94a6e5798a0bf14b99518b4f57ded723090c
     home: https://portworx.com/
@@ -1183,7 +1217,7 @@ entries:
     version: 1.0.49
   - apiVersion: v1
     appVersion: 3.0.0
-    created: "2026-03-31T11:19:44.861452+05:30"
+    created: "2026-04-09T09:17:39.021710287Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 243f032fde97602e1b183f1c72147bdfccf6b1c206843a5d253467759f8616f1
     home: https://portworx.com/
@@ -1215,7 +1249,7 @@ entries:
     version: 1.0.48
   - apiVersion: v1
     appVersion: 2.13.3
-    created: "2026-03-31T11:19:44.86074+05:30"
+    created: "2026-04-09T09:17:39.018715903Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 54a276cedebb165a923df51b7779ab16e14d85722bc51a89426c1750fec0cbc3
     home: https://portworx.com/
@@ -1247,7 +1281,7 @@ entries:
     version: 1.0.47
   - apiVersion: v1
     appVersion: 2.13.2
-    created: "2026-03-31T11:19:44.859567+05:30"
+    created: "2026-04-09T09:17:39.014856142Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 3f439ac3333c99f4fba05d155a6cba687629400b03f797986f952adba61610c8
     home: https://portworx.com/
@@ -1279,7 +1313,7 @@ entries:
     version: 1.0.46
   - apiVersion: v1
     appVersion: 2.13.0
-    created: "2026-03-31T11:19:44.858883+05:30"
+    created: "2026-04-09T09:17:39.013324604Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: ce7655a0687e974270f2653ff187de028eee34afbfbe04f684b258a81f1f510f
     home: https://portworx.com/
@@ -1311,7 +1345,7 @@ entries:
     version: 1.0.44
   - apiVersion: v1
     appVersion: 3.0.0
-    created: "2026-03-31T11:19:44.858205+05:30"
+    created: "2026-04-09T09:17:39.011818544Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: cc085eaaf1dcb2f308d36fce862649345b2586bf43057b78057a75b356a7bf21
     home: https://portworx.com/
@@ -1343,7 +1377,7 @@ entries:
     version: 1.0.43
   - apiVersion: v1
     appVersion: 2.12.2
-    created: "2026-03-31T11:19:44.857257+05:30"
+    created: "2026-04-09T09:17:39.010350718Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: ccb78dfc73523da1f1ea640de6a01f594d9e31965be98bef018ad78c20849f46
     home: https://portworx.com/
@@ -1375,7 +1409,7 @@ entries:
     version: 1.0.42
   - apiVersion: v1
     appVersion: 2.12.2
-    created: "2026-03-31T11:19:44.856565+05:30"
+    created: "2026-04-09T09:17:39.008716944Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: fe3a745bd0cc413e6933af3a813c99c4067d4d9b511d23707276353267afd0e2
     home: https://portworx.com/
@@ -1407,7 +1441,7 @@ entries:
     version: 1.0.41
   - apiVersion: v1
     appVersion: 2.12.2
-    created: "2026-03-31T11:19:44.855641+05:30"
+    created: "2026-04-09T09:17:39.006926003Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: ca7a8d62f1b83f457c4476e257cdd653fc47bfe0ffb084a52df599bc7eecb41f
     home: https://portworx.com/
@@ -1439,7 +1473,7 @@ entries:
     version: 1.0.40
   - apiVersion: v1
     appVersion: 2.12.0
-    created: "2026-03-31T11:19:44.852985+05:30"
+    created: "2026-04-09T09:17:38.998044343Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 7c7ec2087b31f48f69ea40392c3757c29c21261c7cf3ce09e86ea64bde2daeaa
     home: https://portworx.com/
@@ -1471,7 +1505,7 @@ entries:
     version: 1.0.39
   - apiVersion: v1
     appVersion: 2.12.0
-    created: "2026-03-31T11:19:44.851974+05:30"
+    created: "2026-04-09T09:17:38.99547669Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 5fad1de1eef2a2599568ae7f8d5999a74e72051283626530ed3040869a5de7fc
     home: https://portworx.com/
@@ -1503,7 +1537,7 @@ entries:
     version: 1.0.38
   - apiVersion: v1
     appVersion: 2.11.2
-    created: "2026-03-31T11:19:44.851146+05:30"
+    created: "2026-04-09T09:17:38.993082383Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 017e6e2959f19377fa8c93a1a4f79b58d78af67041a67b6a0070be56cd73c03e
     home: https://portworx.com/
@@ -1535,7 +1569,7 @@ entries:
     version: 1.0.37
   - apiVersion: v1
     appVersion: 2.11.2
-    created: "2026-03-31T11:19:44.850453+05:30"
+    created: "2026-04-09T09:17:38.990833271Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: c40fa0649902c27ecab22d60dc7de519b3244e80f095cfbf8a43544c7de11bc9
     home: https://portworx.com/
@@ -1567,7 +1601,7 @@ entries:
     version: 1.0.36
   - apiVersion: v1
     appVersion: 2.9.1.4
-    created: "2026-03-31T11:19:44.849751+05:30"
+    created: "2026-04-09T09:17:38.988494376Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: d4b90e2ac80abfddb6cc6ca50355ded2e9f0c00363d882cfb5b2aedd876364b7
     home: https://portworx.com/
@@ -1599,7 +1633,7 @@ entries:
     version: 1.0.35
   - apiVersion: v1
     appVersion: 2.9.1.4
-    created: "2026-03-31T11:19:44.849001+05:30"
+    created: "2026-04-09T09:17:38.985889078Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 0c97ae21b72e597f05dfe8dc43690621969fed37fa31ff04ede42595c216dc84
     home: https://portworx.com/
@@ -1631,7 +1665,7 @@ entries:
     version: 1.0.34
   - apiVersion: v1
     appVersion: 2.9.1.4
-    created: "2026-03-31T11:19:44.848275+05:30"
+    created: "2026-04-09T09:17:38.982238517Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 93061b602e8d7580788d489d900da303a75c378dc3aaad4dc19624a3ac40a535
     home: https://portworx.com/
@@ -1663,7 +1697,7 @@ entries:
     version: 1.0.33
   - apiVersion: v1
     appVersion: 2.9.1.4
-    created: "2026-03-31T11:19:44.84726+05:30"
+    created: "2026-04-09T09:17:38.980662237Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 1f564dda802bc41cc121c12c3d9e09865e539ffd2ba2f0f94db01954b8005969
     home: https://portworx.com/
@@ -1695,7 +1729,7 @@ entries:
     version: 1.0.32
   - apiVersion: v1
     appVersion: 2.9.1.4
-    created: "2026-03-31T11:19:44.846221+05:30"
+    created: "2026-04-09T09:17:38.978967206Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 5ae3b303ccda0f9725afc9b0b686065e1cc6fc9bbe645e05d678ac46f9965910
     home: https://portworx.com/
@@ -1727,7 +1761,7 @@ entries:
     version: 1.0.31
   - apiVersion: v1
     appVersion: 2.9.1.4
-    created: "2026-03-31T11:19:44.845472+05:30"
+    created: "2026-04-09T09:17:38.977108388Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: f515f0b456e8b91f84da396842e9b2fa66e412c3b88a8ce2cd4d5e50ceb669f5
     home: https://portworx.com/
@@ -1759,7 +1793,7 @@ entries:
     version: 1.0.30
   - apiVersion: v1
     appVersion: 2.6.5
-    created: "2026-03-31T11:19:44.843976+05:30"
+    created: "2026-04-09T09:17:38.973657386Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: f943f54843b9e67b4fefb0bd2325d08550c78409baff0a8547b602d8a831503a
     home: https://portworx.com/
@@ -1797,7 +1831,7 @@ entries:
     version: 1.0.25
   - apiVersion: v1
     appVersion: 2.6.5
-    created: "2026-03-31T11:19:44.843222+05:30"
+    created: "2026-04-09T09:17:38.971629999Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: d8010df5fcd94d216444f720335ad63c7c1873cb7c68aeefed4d192f42c1c443
     home: https://portworx.com/
@@ -1835,7 +1869,7 @@ entries:
     version: 1.0.24
   - apiVersion: v1
     appVersion: 2.6.4.1
-    created: "2026-03-31T11:19:44.842466+05:30"
+    created: "2026-04-09T09:17:38.969336754Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: d063f47a033832d0420e82e77641a1db898b00a085fde7648efb58be4e5e5fe0
     home: https://portworx.com/
@@ -1873,7 +1907,7 @@ entries:
     version: 1.0.23
   - apiVersion: v1
     appVersion: 2.6.1
-    created: "2026-03-31T11:19:44.841316+05:30"
+    created: "2026-04-09T09:17:38.966065521Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 5cfcf903e68549ac434b1a3712795f7ff77a9a744cab02f65afb85f9972725ac
     home: https://portworx.com/
@@ -1911,7 +1945,7 @@ entries:
     version: 1.0.22
   - apiVersion: v1
     appVersion: 2.5.7
-    created: "2026-03-31T11:19:44.840504+05:30"
+    created: "2026-04-09T09:17:38.964164432Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: a2a16f16f3deacc252fcd79d0fbd64b05ce45540b3ecd96120ff070f5623bedf
     home: https://portworx.com/
@@ -1949,7 +1983,7 @@ entries:
     version: 1.0.21
   - apiVersion: v1
     appVersion: 2.5.5
-    created: "2026-03-31T11:19:44.839838+05:30"
+    created: "2026-04-09T09:17:38.9624164Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: a5b53a43ba70482403c8f6470c7603dc02876362f9adfa8c93d0785b40a9ff95
     home: https://portworx.com/
@@ -1987,7 +2021,7 @@ entries:
     version: 1.0.20
   - apiVersion: v1
     appVersion: 2.5.3
-    created: "2026-03-31T11:19:44.838571+05:30"
+    created: "2026-04-09T09:17:38.959084803Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: f9b0a89ff3774a16e5d928d04969cb5d4427f2b034d949d53ea056bb33785923
     home: https://portworx.com/
@@ -2025,7 +2059,7 @@ entries:
     version: 1.0.19
   - apiVersion: v1
     appVersion: 2.5.1
-    created: "2026-03-31T11:19:44.837902+05:30"
+    created: "2026-04-09T09:17:38.956920882Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 7d7e9ce2998d5a1e4a8373b90311036f5c26acb4e49d889eed3117259d336640
     home: https://portworx.com/
@@ -2063,7 +2097,7 @@ entries:
     version: 1.0.18
   - apiVersion: v1
     appVersion: 2.5.0
-    created: "2026-03-31T11:19:44.837053+05:30"
+    created: "2026-04-09T09:17:38.954714226Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 2d104a9a14e758d32ca2611976341d1e8f94326fd395778da76d350753377ac7
     home: https://portworx.com/
@@ -2101,7 +2135,7 @@ entries:
     version: 1.0.17
   - apiVersion: v1
     appVersion: 2.4.0
-    created: "2026-03-31T11:19:44.83637+05:30"
+    created: "2026-04-09T09:17:38.952984761Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 45ba9301d8d9330878bb5999a27870728215faa197867bada30851b7bfd46396
     home: https://portworx.com/
@@ -2139,7 +2173,7 @@ entries:
     version: 1.0.16
   - apiVersion: v1
     appVersion: 2.3.2
-    created: "2026-03-31T11:19:44.835432+05:30"
+    created: "2026-04-09T09:17:38.950854643Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 869de89c3ddcbfba5e245e0de607c2ceb56c5fc25bd063329b833bae4787567a
     home: https://portworx.com/
@@ -2177,7 +2211,7 @@ entries:
     version: 1.0.15
   - apiVersion: v1
     appVersion: 2.3.2
-    created: "2026-03-31T11:19:44.834821+05:30"
+    created: "2026-04-09T09:17:38.945442969Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: d7d41e3eb56705178c1807f32ce626d93e9096ee1cd3ae9573fc63e907aa9840
     home: https://portworx.com/
@@ -2215,7 +2249,7 @@ entries:
     version: 1.0.14
   - apiVersion: v1
     appVersion: 2.2.0.1
-    created: "2026-03-31T11:19:44.834161+05:30"
+    created: "2026-04-09T09:17:38.941561727Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 165771eac681862af0071d4191260b3ab3657f60c3423acd103feba8b9e4f4e8
     home: https://portworx.com/
@@ -2253,7 +2287,7 @@ entries:
     version: 1.0.13
   - apiVersion: v1
     appVersion: 2.2.0.1
-    created: "2026-03-31T11:19:44.833518+05:30"
+    created: "2026-04-09T09:17:38.938238448Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: f92687d2a8e799926e1fcf48f139e080989bb4a48a2ee6ebc1ba88a96921bf30
     home: https://portworx.com/
@@ -2291,7 +2325,7 @@ entries:
     version: 1.0.12
   - apiVersion: v1
     appVersion: 2.2.0.1
-    created: "2026-03-31T11:19:44.832584+05:30"
+    created: "2026-04-09T09:17:38.932650086Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 74bb8619a54e23e628c367a9dea02d7ef4872e373df6ea08daa40cc7aecbf54f
     home: https://portworx.com/
@@ -2329,7 +2363,7 @@ entries:
     version: 1.0.11
   - apiVersion: v1
     appVersion: 2.2.0.1
-    created: "2026-03-31T11:19:44.831837+05:30"
+    created: "2026-04-09T09:17:38.928871096Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: b8a5cd6c82b6c3621d7cd98d1a55166b3fa6773c8bf2c14e5669c4d446df773f
     home: https://portworx.com/
@@ -2367,7 +2401,7 @@ entries:
     version: 1.0.10
   - apiVersion: v1
     appVersion: 2.2.0
-    created: "2026-03-31T11:19:44.936274+05:30"
+    created: "2026-04-09T09:17:39.280618587Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: e4a4e0d96bf6aacabeefcf239cc3f0917bc685aa0ac20025fab54175dc78d527
     home: https://portworx.com/
@@ -2405,7 +2439,7 @@ entries:
     version: 1.0.9
   - apiVersion: v1
     appVersion: 2.2.0
-    created: "2026-03-31T11:19:44.922013+05:30"
+    created: "2026-04-09T09:17:39.226642386Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: dc6e49bce3c6ff97125cf449f5b9a3d6d4427a9c0ce5a5adb6e01ba9753d52d7
     home: https://portworx.com/
@@ -2443,7 +2477,7 @@ entries:
     version: 1.0.8
   - apiVersion: v1
     appVersion: 2.1.4
-    created: "2026-03-31T11:19:44.892692+05:30"
+    created: "2026-04-09T09:17:39.127492411Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: f25936db1ea01b1b71984cab3a3d84e813acc16a7a82439312e3a9e848f18911
     home: https://portworx.com/
@@ -2481,7 +2515,7 @@ entries:
     version: 1.0.7
   - apiVersion: v1
     appVersion: 2.1.3
-    created: "2026-03-31T11:19:44.874135+05:30"
+    created: "2026-04-09T09:17:39.067852684Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: a0c6e92b59f22f48e16148eb63bba26bc7ee8846e31dc65325a3adce408b36a5
     home: https://portworx.com/
@@ -2518,7 +2552,7 @@ entries:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/portworx-1.0.6.tgz
     version: 1.0.6
   - apiVersion: v1
-    created: "2026-03-31T11:19:44.862758+05:30"
+    created: "2026-04-09T09:17:39.027848258Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 909a9a623b21a1f94e259d9644c9449065f515bafae40bbc31111511982c61dd
     home: https://portworx.com/
@@ -2555,7 +2589,7 @@ entries:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/portworx-1.0.5.tgz
     version: 1.0.5
   - apiVersion: v1
-    created: "2026-03-31T11:19:44.854791+05:30"
+    created: "2026-04-09T09:17:39.005325697Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: a6522108d94bef27179c809fa558435733db73fe9991bbed89ab0a8336d17a92
     home: https://portworx.com/
@@ -2588,7 +2622,7 @@ entries:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/portworx-1.0.4.tgz
     version: 1.0.4
   - apiVersion: v1
-    created: "2026-03-31T11:19:44.844645+05:30"
+    created: "2026-04-09T09:17:38.9751645Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: b691f31839736c727da5f900f026e65b0d62c4c3ef88aa01094f6c88c21473e2
     home: https://portworx.com/
@@ -2621,7 +2655,7 @@ entries:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/portworx-1.0.3.tgz
     version: 1.0.3
   - apiVersion: v1
-    created: "2026-03-31T11:19:44.839167+05:30"
+    created: "2026-04-09T09:17:38.960672271Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: 123cb34f6835fb241c4726438688d6b2ce3c978a98a537e01d5f54657da004d9
     home: https://portworx.com/
@@ -2654,7 +2688,7 @@ entries:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/portworx-1.0.2.tgz
     version: 1.0.2
   - apiVersion: v1
-    created: "2026-03-31T11:19:44.830411+05:30"
+    created: "2026-04-09T09:17:38.922731353Z"
     description: A Helm chart for installing Portworx on Kubernetes.
     digest: d7a02b256a8b766398374c5e3cb970c88a97933ac2faf8fd6dbe5203b721a3b5
     home: https://portworx.com/
@@ -2687,7 +2721,7 @@ entries:
   px-backup:
   - apiVersion: v1
     appVersion: 1.2.4
-    created: "2026-03-31T11:19:44.93804+05:30"
+    created: "2026-04-09T09:17:39.284667301Z"
     description: A Helm chart for installing PX-Backup with PX-Central on Kubernetes
       and Openshift
     digest: c111e3545b7bf627c711d0f2268aa5d3b137e1ddc1d14367291fa833343087af
@@ -2709,7 +2743,7 @@ entries:
     version: 1.2.4
   - apiVersion: v1
     appVersion: 1.2.3
-    created: "2026-03-31T11:19:44.937436+05:30"
+    created: "2026-04-09T09:17:39.283401534Z"
     description: A Helm chart for installing PX-Backup with PX-Central on Kubernetes
       and Openshift
     digest: ec4702554f98d06c39eeac9d5c9a09af3bdc521fc924006cd07e969984c46f8b
@@ -2731,7 +2765,7 @@ entries:
     version: 1.2.3
   - apiVersion: v1
     appVersion: 1.2.2
-    created: "2026-03-31T11:19:44.936866+05:30"
+    created: "2026-04-09T09:17:39.282070387Z"
     description: A Helm chart for installing PX-Backup with PX-Central on Kubernetes
       and Openshift
     digest: dd999f075a851dab85a571ddcf0ba8ab43baa2bf457cd998a72965a78a5b7d5b
@@ -2754,7 +2788,7 @@ entries:
   px-central:
   - apiVersion: v1
     appVersion: 2.11.0
-    created: "2026-03-31T11:19:44.958345+05:30"
+    created: "2026-04-09T09:17:39.361142856Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 29c0f917f9e396653a88ad52b89f5fdca89d1afa507a65cab7d0dbf23dde200c
     home: https://portworx.com/
@@ -2775,7 +2809,7 @@ entries:
     version: 2.11.0
   - apiVersion: v1
     appVersion: 2.10.2
-    created: "2026-03-31T11:19:44.953694+05:30"
+    created: "2026-04-09T09:17:39.342663887Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: d27787b21dc9000f931eecdddb1ce39d3214a00d7bbb3573ebaa360bd878dfcf
     home: https://portworx.com/
@@ -2796,7 +2830,7 @@ entries:
     version: 2.10.2
   - apiVersion: v1
     appVersion: 2.10.0
-    created: "2026-03-31T11:19:44.949047+05:30"
+    created: "2026-04-09T09:17:39.325843189Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: c9a9a36f396a0fea8a86cbbef4a0fdff44dfcec3a8d2f38c3c9f14262274aeb6
     home: https://portworx.com/
@@ -2817,7 +2851,7 @@ entries:
     version: 2.10.0
   - apiVersion: v1
     appVersion: 2.9.1
-    created: "2026-03-31T11:19:45.02236+05:30"
+    created: "2026-04-09T09:17:39.655644982Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 5bf1e770ab7a557337f730e034532b9e3a8bc1d0b74eb3ee8bcf7581c63611a3
     home: https://portworx.com/
@@ -2838,7 +2872,7 @@ entries:
     version: 2.9.1
   - apiVersion: v1
     appVersion: 2.9.0
-    created: "2026-03-31T11:19:45.017701+05:30"
+    created: "2026-04-09T09:17:39.643024641Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: a7ed69f149d406a3208a6d1424f7717e793d6fc10875bb7d451ce06287f4eda6
     home: https://portworx.com/
@@ -2859,7 +2893,7 @@ entries:
     version: 2.9.0
   - apiVersion: v1
     appVersion: 2.8.4
-    created: "2026-03-31T11:19:45.013139+05:30"
+    created: "2026-04-09T09:17:39.621630042Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 6b02566876ab42cd1b96139935dc5b50a144f7b6262f31365f3ef4097aa0a802
     home: https://portworx.com/
@@ -2880,7 +2914,7 @@ entries:
     version: 2.8.4
   - apiVersion: v1
     appVersion: 2.8.3
-    created: "2026-03-31T11:19:45.008578+05:30"
+    created: "2026-04-09T09:17:39.604855816Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 4a3b72a263781e6db2bf0189d0ad195a57abd47e8d9089543484c9bc98fe3cda
     home: https://portworx.com/
@@ -2901,7 +2935,7 @@ entries:
     version: 2.8.3
   - apiVersion: v1
     appVersion: 2.8.1
-    created: "2026-03-31T11:19:45.00409+05:30"
+    created: "2026-04-09T09:17:39.584867995Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 83bc24b2fa2102aea2e24bafe5927a701006931d813d3fba52db5168b45347f0
     home: https://portworx.com/
@@ -2922,7 +2956,7 @@ entries:
     version: 2.8.1
   - apiVersion: v1
     appVersion: 2.8.0
-    created: "2026-03-31T11:19:44.999386+05:30"
+    created: "2026-04-09T09:17:39.554784486Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 3330f694cf102d6b9cdcc72526bab40ea1df7bd6644294370c53e77428a22696
     home: https://portworx.com/
@@ -2943,7 +2977,7 @@ entries:
     version: 2.8.0
   - apiVersion: v1
     appVersion: 2.7.3
-    created: "2026-03-31T11:19:44.995477+05:30"
+    created: "2026-04-09T09:17:39.541867217Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 0d78a7746cadc52296cf5ee8440a91989f6cc7e930b3803bfb0232edd8a9c0aa
     home: https://portworx.com/
@@ -2964,7 +2998,7 @@ entries:
     version: 2.7.3
   - apiVersion: v1
     appVersion: 2.7.2
-    created: "2026-03-31T11:19:44.990516+05:30"
+    created: "2026-04-09T09:17:39.525843591Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 0b1b58f2350df2cf7667dead1f0ae90bfa1fea898197c430d844141ea83d122e
     home: https://portworx.com/
@@ -2985,7 +3019,7 @@ entries:
     version: 2.7.2
   - apiVersion: v1
     appVersion: 2.7.1
-    created: "2026-03-31T11:19:44.986764+05:30"
+    created: "2026-04-09T09:17:39.507064364Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 9507fe5de7cdbd94860e9d9f1e6782ac06b0f7dc5e63b2dae34375fa43413f7d
     home: https://portworx.com/
@@ -3006,7 +3040,7 @@ entries:
     version: 2.7.1
   - apiVersion: v1
     appVersion: 2.7.0
-    created: "2026-03-31T11:19:44.982678+05:30"
+    created: "2026-04-09T09:17:39.490120467Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 6ee1cf3cb54d3ce5efd1f7715d0929f280ee805d776cdf80a4c4559b471a8c55
     home: https://portworx.com/
@@ -3027,7 +3061,7 @@ entries:
     version: 2.7.0
   - apiVersion: v1
     appVersion: 2.6.0
-    created: "2026-03-31T11:19:44.978257+05:30"
+    created: "2026-04-09T09:17:39.455362841Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 4d4c8253e0f3b25ff3b038d427bc3dd00f230dd5e46b23cc1ea0824885fe547c
     home: https://portworx.com/
@@ -3048,7 +3082,7 @@ entries:
     version: 2.6.0
   - apiVersion: v1
     appVersion: 2.5.1
-    created: "2026-03-31T11:19:44.974254+05:30"
+    created: "2026-04-09T09:17:39.422819956Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 929a02ae2dc851573cb04755360c4093b4cd70f2387caf9216b458eebbd4eb7a
     home: https://portworx.com/
@@ -3069,7 +3103,7 @@ entries:
     version: 2.5.1
   - apiVersion: v1
     appVersion: 2.5.0
-    created: "2026-03-31T11:19:44.970207+05:30"
+    created: "2026-04-09T09:17:39.409422976Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 961cf314b61d5b289b9b543c0325832b5c29aa2f7790efc0f2e6e2b32a0e4fdc
     home: https://portworx.com/
@@ -3090,7 +3124,7 @@ entries:
     version: 2.5.0
   - apiVersion: v1
     appVersion: 2.3.2
-    created: "2026-03-31T11:19:44.966109+05:30"
+    created: "2026-04-09T09:17:39.391150308Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: b5ea4bd2a14a735fb3a54bcd28cab51b928a155f8f42fb0499d0f811a5e40529
     home: https://portworx.com/
@@ -3111,7 +3145,7 @@ entries:
     version: 2.3.2
   - apiVersion: v1
     appVersion: 2.2.1
-    created: "2026-03-31T11:19:44.961961+05:30"
+    created: "2026-04-09T09:17:39.375300627Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 3a25d05e50126102fcc64b06f40cb89366a3652b421db94c515f35a251cd5e48
     home: https://portworx.com/
@@ -3132,7 +3166,7 @@ entries:
     version: 2.2.1
   - apiVersion: v1
     appVersion: 2.0.1
-    created: "2026-03-31T11:19:44.944403+05:30"
+    created: "2026-04-09T09:17:39.311010812Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 302bac89258ad36177e5207afb1d52fd8c2af0a1879706bd4dcbae8ee53a45b0
     home: https://portworx.com/
@@ -3153,7 +3187,7 @@ entries:
     version: 2.0.1
   - apiVersion: v1
     appVersion: 2.0.0
-    created: "2026-03-31T11:19:44.941216+05:30"
+    created: "2026-04-09T09:17:39.298766871Z"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
     digest: 33b555f29f81559c14cfb484b250336f6554d93228314f6b6d1df4524c1dae6a
     home: https://portworx.com/
@@ -3175,7 +3209,7 @@ entries:
   px-license-server:
   - apiVersion: v1
     appVersion: 1.0.0
-    created: "2026-03-31T11:19:45.022829+05:30"
+    created: "2026-04-09T09:17:39.656482168Z"
     description: A Helm chart for install and configure PX-License-Server on Kubernetes
       and Openshift
     digest: 0e933d960475a2905e0449f337d9633bb3d1254488b057766fb40af4c8e1eafe
@@ -3193,7 +3227,7 @@ entries:
   px-monitor:
   - apiVersion: v1
     appVersion: 1.2.1
-    created: "2026-03-31T11:19:45.024923+05:30"
+    created: "2026-04-09T09:17:39.664931645Z"
     description: A Helm chart for install and configure PX-Monitor on Kubernetes and
       Openshift
     digest: e81ade9a03b338c3e25743f1dabb0209e439cb4012d2d418cb517da315d02f68
@@ -3211,4 +3245,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/px-monitor-1.2.1.tgz
     version: 1.2.1
-generated: "2026-03-31T11:19:44.828633+05:30"
+generated: "2026-04-09T09:17:38.918779902Z"
