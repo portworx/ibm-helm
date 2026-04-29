@@ -1,4 +1,4 @@
-PX_VERSION := 3.6.0
+PX_VERSION := 3.6.0.1
 
 SHELL := /bin/bash
 .ONESHELL:
