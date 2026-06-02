@@ -7,7 +7,42 @@ data:
   versions.yaml: |
     version: {{ .Values.imageVersion }}
     components:
-      {{- if eq .Values.imageVersion "3.6.0.1" }}
+      {{- if eq .Values.imageVersion "3.6.1" }}
+      stork: openstorage/stork:26.3.0
+      autopilot: portworx/autopilot:1.5.0
+      clusterDiags: portworx/cluster-diags:3.6.1
+      csiPlugin: docker.io/portworx/px-pure-csi-driver:26.1.0-pxe
+      csiMigrator: docker.io/portworx/px-pure-csi-migrator:26.1.0-pxe
+      csiLivenessProbe: registry.k8s.io/sig-storage/livenessprobe:v2.14.0
+      csiNodeDriverRegistrar: registry.k8s.io/sig-storage/csi-node-driver-registrar:v2.15.0
+      csiProvisioner: registry.k8s.io/sig-storage/csi-provisioner:v6.1.0
+      csiAttacher: docker.io/portworx/px-pure-csi-attacher:26.1.0-pxe
+      csiResizer: registry.k8s.io/sig-storage/csi-resizer:v2.0.0
+      csiSnapshotter: registry.k8s.io/sig-storage/csi-snapshotter:v8.4.0
+      csiSnapshotController: registry.k8s.io/sig-storage/snapshot-controller:v8.4.0
+      csiTelemetry: docker.io/portworx/px-pure-csi-telemetry:26.1.0-pxe
+      prometheus: quay.io/prometheus/prometheus:v3.11.3
+      prometheusOperator: quay.io/prometheus-operator/prometheus-operator:v0.90.1
+      prometheusConfigReloader: quay.io/prometheus-operator/prometheus-config-reloader:v0.90.1
+      alertManager: quay.io/prometheus/alertmanager:v0.32.0
+      telemetry: portworx/ccm-go:1.2.2
+      pxLibUpdate: portworx/px-lib:pxfslibs-3.6.1.0-mver12-update
+      metricsCollector: portworx/realtime-metrics:1.0.36
+      telemetryProxy: portworx/telemetry-envoy:1.1.20
+      logUploader: portworx/log-upload:px-1.1.94
+      cacheAgent: portworx/px-cache-agent:1.0.0
+      integrationOperator: portworx/px-integration-operator:1.0.0-ea
+      fusionController: portworx/px-fusion:1.0.0-ea
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.2.0
+      dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
+      certManagerController: quay.io/jetstack/cert-manager-controller:v1.20.2
+      certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.20.2
+      certManagerCaInjector: quay.io/jetstack/cert-manager-cainjector:v1.20.2
+      certManagerAcmeSolver: quay.io/jetstack/cert-manager-acmesolver:v1.20.2
+      kubeScheduler: registry.k8s.io/kube-scheduler-amd64:v1.31.0
+      kubeControllerManager: registry.k8s.io/kube-controller-manager-amd64:v1.31.0
+      pause: registry.k8s.io/pause:3.1
+      {{- else if eq .Values.imageVersion "3.6.0.1" }}
       stork: openstorage/stork:26.2.0
       autopilot: portworx/autopilot:1.5.0
       clusterDiags: portworx/cluster-diags:3.6.0
