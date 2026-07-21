@@ -278,6 +278,9 @@ spec:
   {{- if .Values.deleteStrategy.type }}
   deleteStrategy:
     type: {{ .Values.deleteStrategy.type }}
+    {{- if or (eq .Values.deleteStrategy.ignoreVolumes true) (eq .Values.deleteStrategy.ignoreVolumes false) }}
+    ignoreVolumes: {{ .Values.deleteStrategy.ignoreVolumes }}
+    {{- end }}
   {{- end }}
 {{- end }}
 
