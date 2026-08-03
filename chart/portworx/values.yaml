@@ -59,7 +59,8 @@ serviceAccount:
     name:
 
 deleteStrategy:                      # Delete strategy for the portworx cluster
-  type:                              # Valid values: Uninstall, UninstallAndWipe
+  type:                              # Valid values: Uninstall, UninstallAndWipe, UninstallAndDelete
+  ignoreVolumes:                     # Indicates whether to ignore volumes when deleting the portworx cluster
 
 nonDisruptivek8sUpgrade: false          # By default, S&P upgrades are disabled. To enable them, set this to true
 skipHealthChecks: false                 # Used to skip health checks. By default, health checks are enabled. Set this to true to disable health checks
