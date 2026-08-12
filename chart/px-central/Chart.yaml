@@ -13,5 +13,5 @@ keywords:
 name: px-central
 sources:
 - https://github.com/portworx/helm/tree/master/charts/px-central
-version: 3.0.0
+version: 3.0.1
 appVersion: 3.0.0

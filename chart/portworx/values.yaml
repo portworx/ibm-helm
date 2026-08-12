@@ -120,4 +120,6 @@ componentK8sConfig:
 createOSBSecret: false               # Create the OSB secret
 resourceCrn: none                    # The resource CRN for the Portworx cluster
 planId: none                        # The plan ID for the Portworx cluster
+osbURL: https://private-portworx.storage.cloud.ibm.com/billing/v1/register   # OSB registration endpoint
+licenseEndpoint: https://private-portworx.storage.cloud.ibm.com/ibm/_lic     # License endpoint
 
