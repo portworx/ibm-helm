@@ -167,6 +167,12 @@ spec:
           env:
             - name: NAMESPACE
               value: {{ .Release.Namespace }}
+            # UI service types — used by the pre-install hook to emit a
+            # non-blocking warning if the admin UI is exposed via LoadBalancer.
+            - name: PX_CENTRAL_UI_SERVICE_TYPE
+              value: {{ .Values.service.pxCentralUIServiceType | quote }}
+            - name: PX_BACKUP_UI_SERVICE_TYPE
+              value: {{ .Values.service.pxBackupUIServiceType | quote }}
             - name: DEFAULT_USER_NAME
               value: {{ .Values.oidc.centralOIDC.defaultUsername | quote }}
             - name: STORAGE_CLASS
@@ -371,12 +377,12 @@ rules:
     resources: [ "storageclasses" ]
     verbs: [ "get", "list", "watch" ]
   - apiGroups: [ "" ]
-    resources: [ "namespaces" ]
-    verbs: [ "get" ]
-  - apiGroups: [ "" ]
     resources: [ "secrets" ]
     resourceNames: [ "all-icr-io" ]
     verbs: [ "get", "list" ]
+  - apiGroups: [ "" ]
+    resources: [ "namespaces" ]
+    verbs: [ "get" ]
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
@@ -435,4 +441,3 @@ roleRef:
   kind: Role
   name: px-backup-pre-setup-role
   apiGroup: rbac.authorization.k8s.io
-
