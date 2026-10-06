@@ -66,8 +66,8 @@ data:
       telemetryProxy: portworx/telemetry-envoy:1.1.20
       logUploader: portworx/log-upload:px-1.1.94
       cacheAgent: portworx/px-cache-agent:1.1.0
-      integrationOperator: portworx/px-integration-operator:1.0.0-ea
-      fusionController: portworx/px-fusion:1.0.0-ea
+      integrationOperator: portworx/px-integration-operator:1.1.0-ea
+      fusionController: portworx/px-fusion:1.1.0-ea
       dynamicPlugin: portworx/portworx-dynamic-plugin:2.3.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.20.3
