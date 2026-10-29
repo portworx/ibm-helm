@@ -3054,10 +3054,10 @@ entries:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/px-central-3.1.0.tgz
     version: 3.1.0
   - apiVersion: v1
-    appVersion: 3.0.0
-    created: "2026-10-07T03:45:41.882151215-06:00"
+    appVersion: 3.0.1
+    created: "2026-10-29T12:16:24.578345+05:30"
     description: A Helm chart for installing PX-Central on Kubernetes and Openshift
-    digest: 2fa8f33a8c63dcd92d9fbb1604fc502b35b3a110037853fa63307fc9c9a6d94f
+    digest: 46b3978528fdbf9ff686a27aa78e079bce4c940a099949b8b39681586d382e04
     home: https://portworx.com/
     icon: https://raw.githubusercontent.com/portworx/helm/master/doc/media/px-logo.png
     keywords:
@@ -3095,6 +3095,27 @@ entries:
     urls:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/px-central-3.0.0.tgz
     version: 3.0.0
+  - apiVersion: v1
+    appVersion: 2.11.1
+    created: "2026-10-29T12:16:24.573034+05:30"
+    description: A Helm chart for installing PX-Central on Kubernetes and Openshift
+    digest: c188f379c479f8e37362142dd5423884bb312ddc48eebbf525ef79cf3eb2052b
+    home: https://portworx.com/
+    icon: https://raw.githubusercontent.com/portworx/helm/master/doc/media/px-logo.png
+    keywords:
+    - px-backup
+    - storage
+    - persistent disk
+    - pvc
+    - portworx
+    - px-central
+    - lighthouse
+    name: px-central
+    sources:
+    - https://github.com/portworx/helm/tree/master/charts/px-central
+    urls:
+    - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/px-central-2.11.1.tgz
+    version: 2.11.1
   - apiVersion: v1
     appVersion: 2.11.0
     created: "2026-10-07T03:45:41.56648123-06:00"
@@ -3554,4 +3575,4 @@ entries:
     urls:
     - https://raw.githubusercontent.com/portworx/ibm-helm/master/repo/stable/px-monitor-1.2.1.tgz
     version: 1.2.1
-generated: "2026-10-29T12:16:24.223863+05:30"
+generated: "2026-10-29T12:16:24.567445+05:30"
