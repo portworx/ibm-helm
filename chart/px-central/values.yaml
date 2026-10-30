@@ -138,7 +138,7 @@ pxbackup:
   volDeleteWorker: 5
   backupInfoMetricsBackfillHours: ""
   dashboardMetricsBackfillDays: ""
-  version: 3.1.0
+  version: 3.1.2
   skipValidations: false
   usePlatformRbac: false
   encryptMongoDB: false
@@ -257,37 +257,37 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-api
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxCentral
   pxcentralFrontendImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-frontend
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxCentral
   pxcentralBackendImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-backend
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxCentral
   pxcentralMiddlewareImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-lhbackend
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxCentral
   postInstallSetupImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-post-setup
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxCentral
   keycloakBackendImage:
     registry: icr.io/ext
     repo: portworx
     imageName: postgresql
-    tag: "18.4"
+    tag: "18.6"
     module: pxCentral
   keycloakFrontendImage:
     registry: icr.io/ext
@@ -299,13 +299,13 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: keycloak-login-theme
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxCentral
   keycloakInitContainerImage:
     registry: icr.io/ext
     repo: portworx
     imageName: busybox
-    tag: 1.35.0
+    tag: 1.38.0
     module: pxCentral
   mysqlImage:
     registry: icr.io/ext
@@ -317,13 +317,13 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-hook
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxCentral
   mysqlInitImage:
     registry: icr.io/ext
     repo: portworx
     imageName: busybox
-    tag: 1.35.0
+    tag: 1.38.0
     module: pxCentral
 
   ## Images required for enabling px-backup
@@ -331,7 +331,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: px-backup
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxBackup
   mongodbImage:
     registry: icr.io/ext
@@ -363,7 +363,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: px-backup-telemetry-collector
-    tag: 3.1.0
+    tag: 3.1.2
     module: pxBackup
   telemetryLogUploadImage:
     registry: icr.io/ext
@@ -433,7 +433,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: alertmanager
-    tag: v0.33.0
+    tag: v0.34.0
     module: pxBackup
   pxBackupPrometheusOperatorImage:
     registry: icr.io/ext
