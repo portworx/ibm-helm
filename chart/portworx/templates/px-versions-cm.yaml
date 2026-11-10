@@ -30,10 +30,10 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.39
       telemetryProxy: portworx/telemetry-envoy:1.1.20
       logUploader: portworx/log-upload:px-1.1.169
-      cacheAgent: portworx/px-cache-agent:1.1.0
-      integrationOperator: portworx/px-integration-operator:1.0.0-ea
-      fusionController: portworx/px-fusion:1.0.0-ea
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.3.0
+      cacheAgent: portworx/px-cache-agent:1.2.0
+      integrationOperator: portworx/px-integration-operator:1.1.1-ea
+      fusionController: portworx/px-fusion:1.1.1-ea
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.21.1
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.21.1
@@ -65,10 +65,10 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.38
       telemetryProxy: portworx/telemetry-envoy:1.1.20
       logUploader: portworx/log-upload:px-1.1.94
-      cacheAgent: portworx/px-cache-agent:1.1.0
-      integrationOperator: portworx/px-integration-operator:1.1.0-ea
-      fusionController: portworx/px-fusion:1.1.0-ea
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.3.0
+      cacheAgent: portworx/px-cache-agent:1.2.0
+      integrationOperator: portworx/px-integration-operator:1.1.1-ea
+      fusionController: portworx/px-fusion:1.1.1-ea
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.20.3
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.20.3
@@ -100,10 +100,10 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.38
       telemetryProxy: portworx/telemetry-envoy:1.1.20
       logUploader: portworx/log-upload:px-1.1.94
-      cacheAgent: portworx/px-cache-agent:1.0.0
-      integrationOperator: portworx/px-integration-operator:1.0.0-ea
-      fusionController: portworx/px-fusion:1.0.0-ea
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.2.0
+      cacheAgent: portworx/px-cache-agent:1.2.0
+      integrationOperator: portworx/px-integration-operator:1.1.1-ea
+      fusionController: portworx/px-fusion:1.1.1-ea
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.20.3
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.20.3
@@ -135,10 +135,10 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.36
       telemetryProxy: portworx/telemetry-envoy:1.1.20
       logUploader: portworx/log-upload:px-1.1.94
-      cacheAgent: portworx/px-cache-agent:1.0.0
-      integrationOperator: portworx/px-integration-operator:1.0.0-ea
-      fusionController: portworx/px-fusion:1.0.0-ea
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.2.0
+      cacheAgent: portworx/px-cache-agent:1.2.0
+      integrationOperator: portworx/px-integration-operator:1.1.1-ea
+      fusionController: portworx/px-fusion:1.1.1-ea
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.20.2
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.20.2
@@ -170,10 +170,10 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.35
       telemetryProxy: portworx/telemetry-envoy:1.1.19
       logUploader: portworx/log-upload:px-1.1.94
-      cacheAgent: portworx/px-cache-agent:1.0.0
-      integrationOperator: portworx/px-integration-operator:1.0.0-ea
-      fusionController: portworx/px-fusion:1.0.0-ea
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.2.0
+      cacheAgent: portworx/px-cache-agent:1.2.0
+      integrationOperator: portworx/px-integration-operator:1.1.1-ea
+      fusionController: portworx/px-fusion:1.1.1-ea
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.17.4
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.17.4
@@ -205,10 +205,10 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.35
       telemetryProxy: portworx/telemetry-envoy:1.1.19
       logUploader: portworx/log-upload:px-1.1.94
-      cacheAgent: portworx/px-cache-agent:1.0.0
-      integrationOperator: portworx/px-integration-operator:1.0.0-ea
-      fusionController: portworx/px-fusion:1.0.0-ea
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.2.0
+      cacheAgent: portworx/px-cache-agent:1.2.0
+      integrationOperator: portworx/px-integration-operator:1.1.1-ea
+      fusionController: portworx/px-fusion:1.1.1-ea
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.17.4
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.17.4
@@ -235,7 +235,7 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.34
       telemetryProxy: portworx/telemetry-envoy:1.1.18
       logUploader: portworx/log-upload:px-1.1.46
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.1.2
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.17.4
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.17.4
@@ -262,7 +262,7 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.32
       telemetryProxy: portworx/telemetry-envoy:1.1.18
       logUploader: portworx/log-upload:px-1.1.46
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.1.0
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.17.4
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.17.4
@@ -289,7 +289,7 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.32
       telemetryProxy: portworx/telemetry-envoy:1.1.18
       logUploader: portworx/log-upload:px-1.1.46
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.1.0
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.17.4
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.17.4
@@ -316,7 +316,7 @@ data:
       metricsCollector: portworx/realtime-metrics:1.0.32
       telemetryProxy: portworx/telemetry-envoy:1.1.18
       logUploader: portworx/log-upload:px-1.1.46
-      dynamicPlugin: portworx/portworx-dynamic-plugin:2.0.0
+      dynamicPlugin: portworx/portworx-dynamic-plugin:2.4.0
       dynamicPluginProxy: nginxinc/nginx-unprivileged:alpine-slim
       certManagerController: quay.io/jetstack/cert-manager-controller:v1.17.4
       certManagerWebhook: quay.io/jetstack/cert-manager-webhook:v1.17.4
