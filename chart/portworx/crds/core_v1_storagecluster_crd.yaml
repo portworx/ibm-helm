@@ -3,7 +3,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.16.1
+    controller-gen.kubebuilder.io/version: v0.17.0
   name: storageclusters.core.libopenstorage.org
 spec:
   group: core.libopenstorage.org
@@ -218,6 +218,10 @@ spec:
                       driver during upgrades.
                       DEPRECATED: This is no longer needed to lock an image. The new behavior is to
                       use the image as it is, if present, else use a default image.
+                    type: boolean
+                  prometheusAlerts:
+                    description: PrometheusAlerts indicates whether prometheus alerts
+                      are enabled
                     type: boolean
                   providers:
                     description: Providers is a list of input data providers for autopilot
@@ -2167,14 +2171,61 @@ spec:
                     description: Image is docker image of the cluster diags container
                     type: string
                 type: object
-              clusterDomain:
-                description: |-
-                  ClusterDomain specifies the cluster domain for the selected nodes in a sync DR setup.
-                  If this field is empty, it is not sync DR setup
-                type: string
+              cosi:
+                description: COSI configures Container Object Storage Interface support.
+                properties:
+                  controller:
+                    description: Controller configures the COSI object storage controller
+                      container.
+                    properties:
+                      enabled:
+                        default: true
+                        description: |-
+                          Enabled flag indicates whether the operator installs the COSI object storage
+                          controller and the objectstorage.k8s.io bucket CRDs. Both are cluster singletons,
+                          so set this to `false` when they are already installed on the cluster. Default
+                          value is `true` when COSI is enabled.
+                        type: boolean
+                    type: object
+                  enabled:
+                    description: |-
+                      Enabled flag indicates whether COSI (object storage) support is installed for
+                      the storage cluster. Default value is `false`.
+                    type: boolean
+                type: object
               csi:
                 description: CSI configurations for setting up CSI
                 properties:
+                  changedBlockTracking:
+                    description: |-
+                      ChangedBlockTracking specifies whether the K8s native CBT (Change Block Tracking)
+                      will be supported. When enabled, CBT will be installed and managed by the operator.
+                    properties:
+                      enabled:
+                        default: false
+                        description: |-
+                          Enabled determines whether the cbt capabilities are provided by the driver.
+                          When set to true, clients can call the CBT RPC's as mentioned in the K8s CBT Spec. Default value is false.
+                        type: boolean
+                      port:
+                        description: Port specifies the port on which the cbt service
+                          will be exposed. Default value is 56001.
+                        format: int32
+                        minimum: 0
+                        type: integer
+                    type: object
+                  driver:
+                    description: CSIDriverSpec is used to define the CSI driver configurations
+                    properties:
+                      fsGroupPolicy:
+                        description: FsGroupPolicy is the policy for the fsGroup.
+                          The default is File
+                        enum:
+                        - ReadWriteOnceWithFSType
+                        - File
+                        - None
+                        type: string
+                    type: object
                   enabled:
                     description: Enabled flag indicates whether CSI needs to be installed
                       for the storage cluster. Default value is `true`.
@@ -2327,8 +2378,9 @@ spec:
                       storage cluster nodes
                     properties:
                       nodeAffinity:
-                        description: NodeAffinity is used to restrict Portwox on certain
-                          nodes. It works similarly to the [Kubernetes node affinity](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L2692)
+                        description: NodeAffinity is used to restrict Portworx on
+                          certain nodes. It works similarly to the [Kubernetes node
+                          affinity](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L2692)
                           feature.
                         properties:
                           preferredDuringSchedulingIgnoredDuringExecution:
@@ -2568,6 +2620,11 @@ spec:
                           type: object
                         type: array
                     type: object
+                  pxCsiImage:
+                    description: PxCsiImage is the docker image of the PX CSI plugin
+                      container.
+                    pattern: ^[a-zA-Z0-9][a-zA-Z0-9._\-\/:@]*$
+                    type: string
                   resizer:
                     description: CSIResizerSpec is used to define the CSI resizer
                       configurations
@@ -2956,6 +3013,25 @@ spec:
                   pass it the name of the secret. Note that the secret should be in
                   the same namespace as the `StorageCluster` object.
                 type: string
+              kubeDatastore:
+                description: KubeDatastore contains configuration for Kubernetes datastore
+                  features
+                properties:
+                  disableOCPUpgradeBlockOnPoolMigration:
+                    description: |-
+                      DisableOCPUpgradeBlockOnPoolMigration disables holding an external node drain (such as an
+                      OCP upgrade) until dynamic pool migration for that node completes. Defaults to false (the
+                      drain is held). Does not disable pool migration itself.
+                    type: boolean
+                  enableDynamicPools:
+                    default: false
+                    description: |-
+                      EnableDynamicPools enables dynamic pool management for Portworx.
+                      When upgrading from PX <3.5.0 to PX >=3.6.0, this field must be false.
+                      Direct upgrade to 3.6.0 with enableDynamicPools=true is not supported.
+                      First upgrade to 3.6.0, then set enableDynamicPools=true.
+                    type: boolean
+                type: object
               kvdb:
                 description: Kvdb is the information of kvdb that storage driver uses
                 properties:
@@ -5698,6 +5774,20 @@ spec:
                         description: LogUploaderImage is docker image of the log-upload-service
                           container.
                         type: string
+                      metricsCollector:
+                        description: MetricsCollector is the spec for configuring
+                          metrics collector for telemetry
+                        properties:
+                          enabled:
+                            default: true
+                            description: Enabled decides whether metrics collector
+                              needs to be enabled or not, by default it is true
+                            type: boolean
+                          image:
+                            description: Image is docker image of the `collector`
+                              container of the px-telemetry-metrics-collector deployment
+                            type: string
+                        type: object
                       resources:
                         description: |-
                           Resources define resources requests and limits for telemetry pods.
@@ -5817,9 +5907,8 @@ spec:
                           type: string
                       type: object
                     clusterDomain:
-                      description: |-
-                        ClusterDomain specifies the cluster domain for the selected nodes in a sync DR setup.
-                        If this field is empty, it is not sync DR setup
+                      description: ClusterDomain specifies the cluster domain for
+                        the selected nodes in a Two Node Arbiter setup.
                       type: string
                     env:
                       description: Env is a list of [Kubernetes like environment variables](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L1826).
@@ -6081,11 +6170,32 @@ spec:
                       type: object
                   type: object
                 type: array
+              ocpDynamicPlugin:
+                description: OCPDynamicPlugin contains configuration for the OCP console
+                  dynamic plugin.
+                properties:
+                  cacheAgentImage:
+                    description: |-
+                      CacheAgentImage is the legacy image override for the PX Platform Agent.
+                      DEPRECATED: Use spec.platformAgent.image instead. The PX Platform Agent is no longer
+                      tied to the OpenShift console plugin and runs on any Kubernetes platform.
+                      This field is still read for upgrade compatibility and is overridden by
+                      spec.platformAgent.image when both are set.
+                    type: string
+                  pluginImage:
+                    description: PluginImage is the desired image for the OCP console
+                      dynamic plugin UI.
+                    type: string
+                  proxyImage:
+                    description: ProxyImage is the desired image for the OCP dynamic
+                      plugin proxy.
+                    type: string
+                type: object
               placement:
                 description: Placement configuration for the storage cluster pods
                 properties:
                   nodeAffinity:
-                    description: NodeAffinity is used to restrict Portwox on certain
+                    description: NodeAffinity is used to restrict Portworx on certain
                       nodes. It works similarly to the [Kubernetes node affinity](https://github.com/kubernetes/api/blob/master/core/v1/types.go#L2692)
                       feature.
                     properties:
@@ -6326,6 +6436,38 @@ spec:
                       type: object
                     type: array
                 type: object
+              platformAgent:
+                description: |-
+                  PlatformAgent contains configuration for the PX Platform Agent. The agent is
+                  platform-neutral and is supported on both OpenShift and other Kubernetes
+                  distributions for eligible PXE clusters.
+                properties:
+                  enabled:
+                    description: |-
+                      Enabled explicitly enables or disables the PX Platform Agent. When unset, the
+                      operator enables it by default on OpenShift and leaves it disabled on other
+                      Kubernetes platforms.
+                    type: boolean
+                  image:
+                    description: Image overrides the PX Platform Agent image resolved
+                      from the release manifest.
+                    type: string
+                  ui:
+                    description: |-
+                      UI contains configuration for the PX Observability UI that uses the
+                      PX Platform Agent. The UI remains disabled when this block is unset.
+                    properties:
+                      enabled:
+                        description: |-
+                          Enabled explicitly enables or disables the PX Observability UI. When unset,
+                          the UI is disabled.
+                        type: boolean
+                      image:
+                        description: Image overrides the PX Observability UI image
+                          resolved from the release manifest.
+                        type: string
+                    type: object
+                type: object
               portworxApi:
                 description: PortworxAPI is the spec to configure the Portworx API
                   component.
@@ -6395,6 +6537,72 @@ spec:
                 description: PriorityClassName to be passed to Podspec of px pods
                   for it to be scheduled accordingly
                 type: string
+              purePlatform:
+                description: PurePlatform contains configuration for Pure Storage
+                  platform integrations including Fusion and Integration Operator.
+                properties:
+                  fusion:
+                    description: Fusion contains Pure Storage Fusion integration configuration
+                      for the storage cluster.
+                    properties:
+                      enabled:
+                        description: Enabled flag indicates whether Fusion integration
+                          needs to be enabled for the storage cluster.
+                        type: boolean
+                      fusionAuthSecret:
+                        description: |-
+                          FusionAuthSecret is the name of the Kubernetes secret containing LDAP credentials for Fusion authentication
+                          The secret should contain keys: endpoint, username, password (for LDAP auth) or token (for legacy auth)
+                          Default: "pure-fusion-cred"
+                        type: string
+                      image:
+                        description: Image is the docker image of the Fusion controller
+                        type: string
+                      tokenRotationInterval:
+                        description: |-
+                          TokenRotationInterval for API tokens generated from LDAP credentials
+                          Format: duration string (e.g., "24h", "12h", "1h")
+                          Default: "24h" (24 hours)
+                          Minimum: "1h" (1 hour)
+                          Set to "0" to disable automatic token rotation
+                        type: string
+                    type: object
+                  integrationOperator:
+                    description: |-
+                      IntegrationOperator contains the configuration for the Portworx Integration Operator.
+                      The integration operator is deployed on OCP clusters when Fusion is enabled or Dynamic plugin is enabled.
+                    properties:
+                      image:
+                        description: Image is the docker image of the Portworx Integration
+                          Operator
+                        type: string
+                    type: object
+                type: object
+              pxfslibsUpdate:
+                description: PxlibsUpdate defines the configuration for the deployment
+                  of pxlibs-update deamonset.
+                properties:
+                  autoDelete:
+                    description: |-
+                      AutoDelete determines whether the pxlibs-update deamonset should be deleted after successful completion.
+                      If set to false, the job will remain available for debugging or reuse.
+                    type: boolean
+                  enabled:
+                    default: false
+                    type: boolean
+                  image:
+                    description: Image specifies the container image to be used for
+                      the pxlibs-update.
+                    type: string
+                  onDemandTrigger:
+                    description: OnDemandTrigger represents a manual trigger time
+                      run the pxlibs-update deamonset on demand.
+                    type: string
+                  schedule:
+                    description: Schedule specifies the cron expression for scheduling
+                      periodic execution of the pxlibs-update deamonset.
+                    type: string
+                type: object
               resources:
                 description: Resource requirements for portworx container in  a storage
                   cluster pod, e.g. CPU and memory requests or limits
@@ -6463,12 +6671,55 @@ spec:
                   the runtime options.
                 type: object
                 x-kubernetes-preserve-unknown-fields: true
+              secretProviderPerFeature:
+                description: |-
+                  SecretProviderPerFeature allows configuring different secrets providers for specific features.
+                  This is an optional field that enables using multiple secrets providers within the same deployment.
+                  Each field represents a feature with its own validation constraints.
+                  If a feature is not configured here, it will use the default SecretsProvider.
+                  Example:
+                    secretProviderPerFeature:
+                      volumeEncryption: k8s
+                      cloudProviderCred: vault
+                properties:
+                  cloudProviderCred:
+                    description: CloudProviderCred specifies the secret provider for
+                      cloud provider credentials
+                    enum:
+                    - k8s
+                    - vault
+                    type: string
+                  cloudSnap:
+                    description: CloudSnap specifies the secret provider for cloud
+                      snapshot feature
+                    enum:
+                    - k8s
+                    - vault
+                    - vault-transit
+                    - aws-kms
+                    - kvdb
+                    - gcloud-kms
+                    - azure-kv
+                    - ibm-kp
+                    type: string
+                  volumeEncryption:
+                    description: VolumeEncryption specifies the secret provider for
+                      volume encryption feature
+                    enum:
+                    - k8s
+                    - vault
+                    - vault-transit
+                    - aws-kms
+                    - kvdb
+                    - gcloud-kms
+                    - azure-kv
+                    - ibm-kp
+                    type: string
+                type: object
               secretsProvider:
-                description: SecretsProvider is the name of secret provider Portworx
-                  uses to store your credentials. To use features like cloud snapshots
-                  or volume encryption, you must configure a secret store provider.
-                  Refer to the [Secret store management page](/portworx-enterprise/operations/key-management)for
-                  more details.
+                description: |-
+                  SecretsProvider is the name of secret provider Portworx uses to store your credentials. To use features like cloud snapshots or volume encryption, you must configure a secret store provider. Refer to the [Secret store management page](/portworx-enterprise/operations/key-management)for more details.
+                  This serves as the default provider when no feature-specific provider is configured.
                 type: string
               security:
                 description: Security configurations for specifying PX-Security configurations.
@@ -6726,6 +6977,55 @@ spec:
                       DEPRECATED: This is no longer needed to lock an image. The new behavior is to
                       use the image as it is, if present, else use a default image.
                     type: boolean
+                  probes:
+                    description: |-
+                      Probes is an array of probe configurations for stork pods. Each entry
+                      specifies a probe type (currently only "readiness") and its
+                      parameters. Currently, only "readiness" is supported for stork deployment.
+                      These probes are only applied when the stork image version
+                      supports the /healthz endpoint (>= 26.4.0) or uses a non-semver tag.
+                      If not specified, a default readiness probe is added.
+                    items:
+                      description: StorkProbeSpec defines a single probe configuration
+                        for stork pods.
+                      properties:
+                        failureThreshold:
+                          description: |-
+                            FailureThreshold is the minimum consecutive failures for the probe
+                            to be considered failed.
+                          format: int32
+                          type: integer
+                        initialDelaySeconds:
+                          description: |-
+                            InitialDelaySeconds is the number of seconds after the container has started
+                            before the probe is initiated.
+                          format: int32
+                          type: integer
+                        periodSeconds:
+                          description: PeriodSeconds is how often (in seconds) to
+                            perform the probe.
+                          format: int32
+                          type: integer
+                        successThreshold:
+                          description: |-
+                            SuccessThreshold is the minimum consecutive successes for the probe
+                            to be considered successful.
+                          format: int32
+                          type: integer
+                        timeoutSeconds:
+                          description: TimeoutSeconds is the number of seconds after
+                            which the probe times out.
+                          format: int32
+                          type: integer
+                        type:
+                          description: Type is the probe type. Must be "readiness".
+                          enum:
+                          - readiness
+                          type: string
+                      required:
+                      - type
+                      type: object
+                    type: array
                   resources:
                     description: Resources for stork and stork-scheduler pods, e.g.
                       CPU and memory requests or limits
@@ -6780,6 +7080,84 @@ spec:
                           More info: https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
                         type: object
                     type: object
+                  restrictDataProtectionRBAC:
+                    description: |-
+                      RestrictDataProtectionRBAC controls Stork's RBAC permissions for
+                      data protection workflows such as application backups, restores,
+                      and migrations.
+
+                      When false or omitted (default), Stork is granted full RBAC permissions
+                      required for data protection features. This is the default behavior
+                      and provides complete backup/restore/migration capabilities.
+
+                      When true, Stork's data protection RBAC is restricted to minimal
+                      permissions for core scheduler/monitoring functionality only.
+                      Use this for storage-only deployments that do not require
+                      data protection features.
+                    type: boolean
+                  scheduler:
+                    description: |-
+                      Scheduler holds configuration that applies to the stork-scheduler workload
+                      (the kube-scheduler binary that the operator runs alongside stork). Knobs
+                      that target the stork controller itself should not be placed here.
+                    properties:
+                      kubeSchedulerClientBurst:
+                        description: |-
+                          KubeSchedulerClientBurst overrides clientConnection.burst in the generated
+                          stork-config ConfigMap, which controls the kube-scheduler API client's
+                          burst capacity. When unset, the upstream default (100) is used.
+                        format: int32
+                        maximum: 10000
+                        minimum: 1
+                        type: integer
+                      kubeSchedulerClientQPS:
+                        description: |-
+                          KubeSchedulerClientQPS overrides clientConnection.qps in the generated
+                          stork-config ConfigMap, which controls the kube-scheduler API client's
+                          steady-state request rate. When unset, the upstream default (50) is used.
+                        format: int32
+                        maximum: 10000
+                        minimum: 1
+                        type: integer
+                      kubeSchedulerExtenderWeight:
+                        description: |-
+                          KubeSchedulerExtenderWeight overrides the extender weight in the generated
+                          stork-config ConfigMap, which controls how much influence stork's prioritize
+                          verb has on the final node selection compared to kube-scheduler's in-tree
+                          priority plugins. When unset, the operator default (1) is used.
+                        format: int32
+                        minimum: 1
+                        type: integer
+                      kubeSchedulerNodeCacheEnabled:
+                        description: |-
+                          KubeSchedulerNodeCacheEnabled overrides the extender's nodeCacheCapable
+                          flag in the generated stork-config ConfigMap. When set to true, the
+                          kube-scheduler passes candidate nodes to the extender as
+                          ExtenderArgs.NodeNames (name-only) and reuses its cache-backed NodeInfo
+                          for downstream scoring; this avoids the k8s scheduler regression where
+                          in-tree resource-scoring plugins see empty NodeInfo for extender-gated
+                          pods and score all nodes identically. Requires stork 26.4.2 or newer,
+                          which is the first version whose /filter and /prioritize handlers
+                          accept the NodeNames request format; enabling it against an older
+                          stork will panic the extender. When unset, the operator enables this
+                          automatically for stork >= 26.4.2 and leaves it disabled otherwise.
+                          An explicit false is always honoured regardless of stork version; an
+                          explicit true is ignored (with a warning) when the running stork is
+                          below the minimum supported version.
+                        type: boolean
+                      verboseLogLevel:
+                        description: |-
+                          VerboseLogLevel sets klog verbosity (--v=N) on the stork-scheduler
+                          container command. When unset, the legacy StorkSpec.Args["verbose"]=="true"
+                          toggle still applies as --v=5.
+                        format: int32
+                        minimum: 0
+                        type: integer
+                    type: object
+                  useWorkloadIdentity:
+                    description: UseWorkloadIdentity if set, stork will use the same
+                      workload identity credentials as used by Portworx
+                    type: boolean
                   volumes:
                     description: Volumes is a list of extra volumes to used by stork.
                       The schema is similar to the [top-level volumes](#volume-configuration).
@@ -8516,6 +8894,17 @@ spec:
                       type: object
                     type: array
                 type: object
+              taintBasedScheduling:
+                description: |-
+                  TaintBasedScheduling contains the taint-based scheduling configuration for the storage cluster.
+                  When enabled, the operator will apply taints to Px nodes, configure tolerations for Portworx components and
+                  enable feature flag in stork to add tolerations to application pods using px backend.
+                properties:
+                  enabled:
+                    description: Enabled indicates whether taint-based scheduling
+                      is enabled for the storage cluster.
+                    type: boolean
+                type: object
               updateStrategy:
                 description: |-
                   An update strategy to replace existing StorageCluster pods with new pods.
@@ -8525,6 +8914,11 @@ spec:
                     description: RollingUpdate is spec to control the desired behavior
                       of storage cluster rolling update.
                     properties:
+                      disablePoolRelocate:
+                        description: |-
+                          DisablePoolRelocate disables relocating pools off a node before the operator-driven
+                          rolling upgrade deletes that node's PX pod. Defaults to false (relocate runs).
+                        type: boolean
                       disruption:
                         description: |-
                           The default behavior is non-disruptive upgrades. This setting disables the default
@@ -10476,6 +10870,14 @@ spec:
                       - cloudProvider
                       type: object
                     type: array
+                  gcp:
+                    description: GCP contains configuration for GCP workload identity
+                    properties:
+                      credentialsConfigMap:
+                        description: CredentialsConfigMap is the name of the configmap
+                          that contains the GCP workload identity credentials
+                        type: string
+                    type: object
                 type: object
             type: object
           status:
@@ -10501,6 +10903,10 @@ spec:
                   description: ClusterCondition contains condition information for
                     the cluster
                   properties:
+                    lastMigrationState:
+                      description: LastMigrationState is the last migration state
+                        of the node before it failed
+                      type: string
                     lastTransitionTime:
                       description: LastTransitionTime the condition transitioned from
                         one status to another
@@ -10538,6 +10944,11 @@ spec:
                   autopilot:
                     description: Desired image for autopilot.
                     type: string
+                  cacheAgent:
+                    description: |-
+                      CacheAgent specifies the PX Platform Agent image. The field name is retained
+                      for release-manifest compatibility.
+                    type: string
                   certManagerAcmeSolver:
                     description: Desired image for cert-manager acmesolver.
                     type: string
@@ -10552,6 +10963,12 @@ spec:
                     type: string
                   clusterDiags:
                     description: Desired image for cluster diags.
+                    type: string
+                  cosiController:
+                    description: Desired image for the COSI object storage controller.
+                    type: string
+                  cosiSidecar:
+                    description: Desired image for the COSI object storage sidecar.
                     type: string
                   csiAttacher:
                     description: Desired image for CSI attacher.
@@ -10583,6 +11000,9 @@ spec:
                   csiSnapshotController:
                     description: Desired image for CSI snapshot controller.
                     type: string
+                  csiSnapshotMetadata:
+                    description: Desired image for Snapshot Metadata.
+                    type: string
                   csiSnapshotter:
                     description: Desired image for CSI snapshotter.
                     type: string
@@ -10595,8 +11015,14 @@ spec:
                   dynamicPluginProxy:
                     description: Desired image for dynamic plugin proxy.
                     type: string
+                  fusionController:
+                    description: Desired image for Fusion Controller.
+                    type: string
                   grafana:
                     description: Desired image for Grafana.
+                    type: string
+                  integrationOperator:
+                    description: Desired image for Portworx Integration Operator
                     type: string
                   kubeControllerManager:
                     description: Desired image for kube controller manager.
@@ -10628,6 +11054,9 @@ spec:
                   prometheusOperator:
                     description: Desired image for Prometheus operator.
                     type: string
+                  pxLibUpdate:
+                    description: Desired image for pxfslibs deamonset
+                    type: string
                   stork:
                     description: Desired image for stork.
                     type: string
@@ -10649,6 +11078,58 @@ spec:
                   of where the StorageCluster is in its lifecycle. The condition array
                   contains more detailed information about the state of the cluster.
                 type: string
+              pxfslibsUpdate:
+                description: PxLibsUpdate represents the current status of the pxfslibs
+                  update daemonset triggger
+                properties:
+                  scheduleInfo:
+                    description: ScheduleInfo contains timing details for the scheduled
+                      pxfslibs daemonset.
+                    properties:
+                      lastScheduledTime:
+                        description: LastScheduledTime indicates the timestamp when
+                          the pxfslibs daemonset was last scheduled to run.
+                        format: date-time
+                        type: string
+                      nextScheduleTime:
+                        description: NextScheduleTime represents the next expected
+                          time when the pxfslibs daemonset will run.
+                        format: date-time
+                        type: string
+                    type: object
+                  triggers:
+                    description: Triggers lists the statuses of recent PxFsLibs update
+                      triggers.
+                    items:
+                      description: |-
+                        PxfslibsUpdateTriggerStatus represents the status of an individual PxFsLibs update trigger.
+                        A trigger can be generated by schedule, manual on-demand request, installation, or upgrade event.
+                      properties:
+                        lastTransitionTime:
+                          description: LastTransitionTime is the last time the trigger
+                            status transitioned from one phase to another.
+                          format: date-time
+                          type: string
+                        message:
+                          description: Message provides a human-readable message describing
+                            the current state or result of the trigger.
+                          type: string
+                        phase:
+                          description: Phase indicates the current phase of this trigger
+                            (Scheduled, Running, Completed, etc.).
+                          type: string
+                        triggerTime:
+                          description: TriggerTime specifies when the trigger was
+                            scheduled or executed.
+                          format: date-time
+                          type: string
+                        type:
+                          description: Type specifies the trigger type, e.g., "Cron",
+                            "OnDemand", "Install", or "Update".
+                          type: string
+                      type: object
+                    type: array
+                type: object
               reason:
                 description: Reason is CamelCase messages split with commas indicating
                   details about why the StorageCluster is in this state.
