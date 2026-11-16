@@ -21,7 +21,7 @@ secretType: none                     # Defaults to None, but can be aws-kms/vaul
 envVars: none                        # NOTE: This is a ";" seperated list of environment variables. For eg: MYENV1=myvalue1;MYENV2=myvalue2
 advOpts: none
 
-storkVersion: 26.4.2                 # Defaults to empty, operator will get the version from manifest based on portworx image version.
+storkVersion: 26.5.0                 # Defaults to empty, operator will get the version from manifest based on portworx image version.
 
 customRegistryURL:
 registrySecret:
@@ -46,8 +46,8 @@ installCertManager: false            # Install PX managed cert-manager
 etcd:
   secret: none                       # Secret name where the username, password and CA cert for ETCD authentication is stored
 
-imageVersion: 3.7.1                # Version of the PX Image.
-pxOperatorImageVersion: 26.4.0       # Version of the PX operator image.
+imageVersion: 3.7.2                # Version of the PX Image.
+pxOperatorImageVersion: 26.5.0       # Version of the PX operator image.
 changePortRange: false               # change start range to 17000
 enablePVCController: false           # enable PVC Controller when running on OCP 4.3 or above or on IKS VPC Gen2
 
@@ -80,6 +80,14 @@ updateStrategy:
   autoUpdateComponents:                   # Indicates the update strategy for the component images
                                           # valid values None,Once,Always
 
+platformAgent:                        # PX Platform Agent, supported on OpenShift and other Kubernetes distributions for eligible PXE clusters.
+  enabled:                            # Set explicitly to true/false. When unset, the operator enables it on OpenShift and leaves it disabled on other Kubernetes platforms.
+                                      # The image and ui settings below are applied only when this is set to true.
+  image: ""                           # Overrides the PX Platform Agent image resolved from the release manifest.
+  ui:                                 # PX Observability UI that uses the PX Platform Agent.
+    enabled:                          # When unset, the UI is disabled.
+    image: ""                         # Overrides the PX Observability UI image resolved from the release manifest.
+
 migrateToComponentK8sConfig: false
 componentK8sConfig:
   enabled: false                                          # Enables or disables creation of ComponentK8sConfig CR
@@ -94,6 +102,11 @@ componentK8sConfig:
   #         example-label: "value"
   #       containerConfigs:                                          # Configuration applied at container level
   #         - containerNames: ["autopilot"]                          # List of container names inside the workload
+  #           args: ["log-level=debug"]                              # Args merged into existing container args keyed by the text before the first "=";
+  #                                                                  # a matching key is replaced in place, otherwise appended. Unsupported keys are rejected.
+  #           env:                                                   # Env vars merged by name (replace in place or append). Unsupported names are rejected.
+  #             - name: EXAMPLE_ENV
+  #               value: "example"
   #           resources:                                             # Resource requirements for the containers
   #             requests:
   #               cpu: "100m"
