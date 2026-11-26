@@ -138,7 +138,7 @@ pxbackup:
   volDeleteWorker: 5
   backupInfoMetricsBackfillHours: ""
   dashboardMetricsBackfillDays: ""
-  version: 3.2.0
+  version: 3.2.1
   skipValidations: false
   usePlatformRbac: false
   encryptMongoDB: false
@@ -240,31 +240,31 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-api
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxCentral
   pxcentralFrontendImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-frontend
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxCentral
   pxcentralBackendImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-backend
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxCentral
   pxcentralMiddlewareImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-ui-lhbackend
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxCentral
   postInstallSetupImage:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-post-setup
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxCentral
   keycloakBackendImage:
     registry: icr.io/ext
@@ -282,7 +282,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: keycloak-login-theme
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxCentral
   keycloakInitContainerImage:
     registry: icr.io/ext
@@ -300,7 +300,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: pxcentral-onprem-hook
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxCentral
   mysqlInitImage:
     registry: icr.io/ext
@@ -314,7 +314,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: px-backup
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxBackup
   mongodbImage:
     registry: icr.io/ext
@@ -340,7 +340,7 @@ images:
     registry: icr.io/ext
     repo: portworx
     imageName: px-backup-telemetry-collector
-    tag: 3.2.0
+    tag: 3.2.1
     module: pxBackup
   telemetryLogUploadImage:
     registry: icr.io/ext
